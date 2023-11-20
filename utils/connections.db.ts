@@ -1,6 +1,8 @@
 import { Sequelize } from 'sequelize';
 
-export const sequelize = new Sequelize(process.env.CONNECTION_STRING_DB) // Example for postgres
+const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
+
+export const sequelize = new Sequelize(connectToDatabaseString!) // Example for postgres
 
 
 
