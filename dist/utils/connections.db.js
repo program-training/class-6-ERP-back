@@ -9,18 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.get = void 0;
-const products_model_1 = require("./products.model");
-// import * as productsService from "./product.service";
-function get() {
+exports.connectToDatabase = exports.sequelize = void 0;
+const sequelize_1 = require("sequelize");
+exports.sequelize = new sequelize_1.Sequelize(process.env.CONNECTION_STRING_DB); // Example for postgres
+function connectToDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const users = yield products_model_1.Product.count();
-            console.log(users);
+            yield exports.sequelize.authenticate();
+            console.log('Connection has been established successfully.');
         }
-        catch (err) {
-            console.log('Failed to get users');
+        catch (error) {
+            console.error('Unable to connect to the database:', error);
         }
     });
 }
-exports.get = get;
+exports.connectToDatabase = connectToDatabase;
