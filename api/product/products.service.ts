@@ -6,25 +6,21 @@ const productService = {
         const products = await Product.findAll();
         return products.map((product) => product.toJSON() as ShopProductInterface);
     },
-    // getAllProductsAdmin: async (): Promise<AdminProductInterface[]> => {
-    //     const products = await Product.findAll();
-    //     return products.map((product) => product.toJSON() as AdminProductInterface);
-    // },
 
-    getProductById: async (id: number): Promise<ProductAttributes | null> => {
+    getProductById: async (id: number): Promise<AdminProductInterface | null> => {
         const product = await Product.findOne({ where: { product_id: id } });
-        return product ? (product.toJSON() as ProductAttributes) : null;
+        return product ? (product.toJSON() as AdminProductInterface) : null;
     },
 
-    createProduct: async (product: ProductAttributes): Promise<ProductAttributes> => {
+    createProduct: async (product: AdminProductInterface): Promise<AdminProductInterface> => {
         const createdProduct = await Product.create(product);
-        return createdProduct.toJSON() as ProductAttributes;
+        return createdProduct.toJSON() as AdminProductInterface;
     },
 
-    updateProduct: async (id: number, updatedProduct: ProductAttributes): Promise<ProductAttributes | null> => {
+    updateProduct: async (id: number, updatedProduct: AdminProductInterface): Promise<AdminProductInterface | null> => {
         await Product.update(updatedProduct, { where: { product_id: id } });
         const product = await Product.findOne({ where: { product_id: id } });
-        return product ? (product.toJSON() as ProductAttributes) : null;
+        return product ? (product.toJSON() as AdminProductInterface) : null;
     },
 
     deleteProduct: async (id: number): Promise<void> => {
@@ -45,7 +41,7 @@ const productService = {
 
         // Save the updated product
         await product.save();
-        return product.toJSON() as ProductAttributes;
+        return product.toJSON() as AdminProductInterface;
     },
 };
 

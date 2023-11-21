@@ -104,5 +104,5 @@ export default {
     updateProduct,
     deleteProduct,
     updateProductQuantity,
-    // getAllProductsAdmin,
+    getAllProductsAdmin,
 };
