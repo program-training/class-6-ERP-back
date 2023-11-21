@@ -1,4 +1,4 @@
-import { Product, AdminProduct } from './products.model';
+import { Product } from './products.model';
 import { ShopProductInterface } from './products.interface';
 
 const productService = {
@@ -25,7 +25,7 @@ const productService = {
     // }
 
 
-    
+
     // Save the updated product
     await product.save();
     return product.toJSON() as ShopProductInterface;

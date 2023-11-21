@@ -12,11 +12,7 @@ router.patch('/:id', productController.updateProductQuantity);
 
 
 router.get(`/shop_inventory?search={searchText}`, shopController.getAllProducts);
-
-// Fetch a specific inventory item
 router.get('/shop_inventory/:productId', shopController.getProductById);
-
-// Update the purchased products
 router.post('/shop_inventory/updateInventory', shopController.updateProductQuantity);
 
 
