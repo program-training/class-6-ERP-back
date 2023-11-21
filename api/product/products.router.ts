@@ -3,12 +3,22 @@ import productController from "./products.controller";
 
 const router = express.Router();
 
-router.get('/', productController.getAllProducts);
-router.get('/:id', productController.getProductById);
-router.post('/', productController.createProduct);
-router.put('/:id', productController.updateProduct);
-router.delete('/:id', productController.deleteProduct);
-router.patch('/:id', productController.updateProductQuantity);
+// Returns all inventory items
+router.get('/api/inventory', productController.getAllInventory);
+
+// Returns a specific inventory item
+router.get('/api/inventory/:productId', productController.getInventoryById);
+
+// Adds a new inventory item
+router.post('/api/inventory', productController.addNewInventoryItem);
+
+// Updates an inventory item
+router.put('/api/inventory/:productId', productController.updateInventoryItem);
+
+// Deletes an inventory item
+router.delete('/api/inventory/:productId', productController.deleteInventoryItem);
+
+
 
 
 

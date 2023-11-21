@@ -13,90 +13,70 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_service_1 = __importDefault(require("./products.service"));
-// Get all products
-const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllInventory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log('Request received to get all products');
-        const products = yield products_service_1.default.getAllProducts();
-        console.log('Retrieved products:', products);
-        res.status(200).json(products);
+        const inventory = yield products_service_1.default.getAllInventory();
+        res.status(200).json(inventory);
     }
     catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching inventory:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-// Get product by ID
-const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = parseInt(req.params.id, 10);
+const getInventoryById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const productId = req.params.productId;
     try {
-        const product = yield products_service_1.default.getProductById(productId);
-        if (product) {
-            res.status(200).json(product);
+        const inventoryItem = yield products_service_1.default.getInventoryById(productId);
+        if (inventoryItem) {
+            res.status(200).json(inventoryItem);
         }
         else {
-            res.status(404).json({ message: 'Product not found' });
+            res.status(404).json({ message: 'Inventory item not found' });
+
         }
     }
     catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-// Create new product
-const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const newProductData = req.body;
+const addNewInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const newInventoryItemData = req.body;
     try {
-        const product = yield products_service_1.default.createProduct(newProductData);
-        res.status(201).json(product);
+        const createdInventoryItem = yield products_service_1.default.addNewInventoryItem(newInventoryItemData);
+        res.status(201).json(createdInventoryItem);
+
     }
     catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-// Update product
-const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = parseInt(req.params.id, 10);
-    const updatedProductData = req.body;
+const updateInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const productId = req.params.productId;
+    const updatedInventoryItemData = req.body;
     try {
-        const product = yield products_service_1.default.updateProduct(productId, updatedProductData);
-        if (product) {
-            res.status(200).json(product);
+        const updatedInventoryItem = yield products_service_1.default.updateInventoryItem(productId, updatedInventoryItemData);
+        if (updatedInventoryItem) {
+            res.status(200).json(updatedInventoryItem);
         }
         else {
-            res.status(404).json({ message: 'Product not found' });
+            res.status(404).json({ message: 'Inventory item not found' });
+
         }
     }
     catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-// Delete product
-const deleteProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = parseInt(req.params.id, 10);
+const deleteInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const productId = req.params.productId;
     try {
-        const deletedProduct = yield products_service_1.default.deleteProduct(productId);
-        if (deletedProduct) {
-            res.status(200).json(deletedProduct);
+        const deletedInventoryItem = yield products_service_1.default.deleteInventoryItem(productId);
+        if (deletedInventoryItem) {
+            res.status(200).json(deletedInventoryItem);
         }
         else {
-            res.status(404).json({ message: 'Product not found' });
-        }
-    }
-    catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-    }
-});
-// Update quantity
-const updateProductQuantity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = parseInt(req.params.id, 10);
-    const operation = req.body.operation; // 'increment' or 'decrement'
-    try {
-        const product = yield products_service_1.default.updateProductQuantity(productId, operation);
-        if (product) {
-            res.status(200).json(product);
-        }
-        else {
-            res.status(404).json({ message: 'Product not found' });
+            res.status(404).json({ message: 'Inventory item not found' });
+
         }
     }
     catch (error) {
@@ -104,10 +84,10 @@ const updateProductQuantity = (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
 });
 exports.default = {
-    getAllProducts,
-    getProductById,
-    createProduct,
-    updateProduct,
-    deleteProduct,
-    updateProductQuantity,
+    getAllInventory,
+    getInventoryById,
+    addNewInventoryItem,
+    updateInventoryItem,
+    deleteInventoryItem,
+
 };

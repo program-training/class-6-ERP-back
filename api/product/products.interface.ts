@@ -1,6 +1,7 @@
-// product.interfaces.ts
-interface ShopProductInterface {
-    id: string;
+// product.interface.ts
+export interface ShopProductInterface {
+    id?: string;
+
     name: string;
     salePrice: number;
     quantity: number;
@@ -13,14 +14,30 @@ interface ShopProductInterface {
     };
 }
 
-interface AdminProductInterface extends ShopProductInterface {
+export interface AdminProductInterface extends ShopProductInterface {
+
     isForSale: boolean;
     costPrice: number;
     supplier: string;
 }
 
-// Omitting 'id' from AdminProductInterface for POST request
-type CreateProductRequest = Omit<AdminProductInterface, 'id'>;
 
-// Partial AdminProductInterface for PUT request
-type UpdateProductRequest = Partial<AdminProductInterface>;
+export type CreateProductRequest = Omit<AdminProductInterface, 'id'>;
+export type UpdateProductRequest = Partial<AdminProductInterface>;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
