@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import productService from './product.service';
+import productService from './products';
 import { ProductCreateUpdateDTO } from './product.interfaces';
 
 // Get all products
