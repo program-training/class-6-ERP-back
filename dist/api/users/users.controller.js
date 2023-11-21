@@ -40,17 +40,17 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userService = __importStar(require("./users.service"));
 const SECRET_KEY = 'your-secret-key';
 const generateToken = (userId) => {
-    return jsonwebtoken_1.default.sign({ userId }, SECRET_KEY, { expiresIn: '1h' });
+    return jsonwebtoken_1.default.sign({ userId }, SECRET_KEY, { expiresIn: '3h' });
 };
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield userService.loginUserInDB(req.body);
-        if (user.status === 200) {
-            const token = generateToken(user.content.userId);
-            res.status(user.status).json(Object.assign(Object.assign({}, user.content), { token }));
+        const user = yield userService.loginUser(req.body);
+        if (user) {
+            const token = generateToken('user');
+            res.json({ user, token });
         }
         else {
-            res.status(user.status).json(user.content);
+            res.json(' is not logged in');
         }
     }
     catch (err) {
@@ -61,12 +61,18 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.loginUser = loginUser;
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const users = yield userService.getUsersFromDB();
-        res.json(users);
+        const userCreationResult = yield userService.registerUser(req.body);
+        // Check the status and send appropriate response
+        if (userCreationResult.status === 201) {
+            res.status(userCreationResult.status).json({ user: userCreationResult.user, message: 'User created successfully' });
+        }
+        else {
+            res.status(userCreationResult.status).json({ message: userCreationResult.message });
+        }
     }
     catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error' });
+        console.error('An error occurred while processing the request:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 exports.registerUser = registerUser;
