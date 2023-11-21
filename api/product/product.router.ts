@@ -10,6 +10,4 @@ router.put('/:id', productController.updateProduct);
 router.delete('/:id', productController.deleteProduct);
 router.patch('/:id', productController.updateProductQuantity);
 
-
-
 export default router;
