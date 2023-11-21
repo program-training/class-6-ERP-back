@@ -10,7 +10,7 @@ const generateToken = (userId: string) => {
 
 export const loginUser = async (req: Request, res: Response) => {
   try {
-    const user = await userService.loginUserInDB(req.body);
+    const user = await userService.loginUser(req.body);
     if (user.status === 200) {
       const token = generateToken(user.content.userId);
       res.status(user.status).json({ ...user.content, token });

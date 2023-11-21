@@ -4,12 +4,8 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-<<<<<<< HEAD
     "build": "tsc",
     "dev":"tsx app",
-=======
-    "build": "tsc --watch",
->>>>>>> 8303a9e45df4f41c3da5982a67138e907638ac3e
     "start": "nodemon dist/app.js",
     "test": "vitest"
   },
