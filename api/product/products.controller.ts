@@ -1,96 +1,70 @@
 // product.controller.ts
 import { Request, Response } from 'express';
 import productService from './products.service';
-import { ShopProductInterface, CreateProductRequest, UpdateProductRequest } from './products.interface';
+import { ShopProductInterface, CreateProductRequest, UpdateProductRequest ,AdminProductInterface} from './products.interface';
 
-// Get all products
-const getAllProducts = async (req: Request, res: Response): Promise<void> => {
+
+const getAllInventory = async (req: Request, res: Response): Promise<void> => {
     try {
-        console.log('Request received to get all products');
-        const products = await productService.getAllProducts();
-        console.log('Retrieved products:', products);
-        res.status(200).json(products);
+        const inventory = await productService.getAllInventory();
+        res.status(200).json(inventory);
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching inventory:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 };
 
-const getAllProductsAdmin = async (req: Request, res: Response): Promise<void> => {
-    try {
-        console.log('Request received to get all products');
-        const products = await productService.getAllProductsAdmin();
-        console.log('Retrieved products:', products);
-        res.status(200).json(products);
-    } catch (error) {
-        console.error('Error fetching products:', error);
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
+const getInventoryById = async (req: Request, res: Response): Promise<void> => {
+    const productId = req.params.productId;
 
-// Get product by ID
-const getProductById = async (req: Request, res: Response): Promise<void> => {
-     const productId = parseInt(req.params.id, 10);
     try {
-        const product = await productService.getProductById(productId);
-        if (product) {
-            res.status(200).json(product);
+        const inventoryItem = await productService.getInventoryById(productId);
+        if (inventoryItem) {
+            res.status(200).json(inventoryItem);
         } else {
-            res.status(404).json({ message: 'Product not found' });
+            res.status(404).json({ message: 'Inventory item not found' });
         }
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
 
-// Create new product
-const createProduct = async (req: Request, res: Response): Promise<void> => {
-    const newProductData: CreateProductRequest = req.body;
+const addNewInventoryItem = async (req: Request, res: Response): Promise<void> => {
+    const newInventoryItemData: CreateProductRequest = req.body;
+
     try {
-        const product = await productService.createProduct(newProductData);
-        res.status(201).json(product);
+        const createdInventoryItem = await productService.addNewInventoryItem(newInventoryItemData);
+        res.status(201).json(createdInventoryItem);
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
 
-// Update product
-const updateProduct = async (req: Request, res: Response): Promise<void> => {
-        const productId = parseInt(req.params.id, 10);
-    const updatedProductData: UpdateProductRequest = req.body;
+const updateInventoryItem = async (req: Request, res: Response): Promise<void> => {
+    const productId = req.params.productId;
+    const updatedInventoryItemData = req.body;
+
     try {
-        const product = await productService.updateProduct(productId, updatedProductData);
-        if (product) {
-            res.status(200).json(product);
+        const updatedInventoryItem = await productService.updateInventoryItem(productId, updatedInventoryItemData);
+        if (updatedInventoryItem) {
+            res.status(200).json(updatedInventoryItem);
         } else {
-            res.status(404).json({ message: 'Product not found' });
+            res.status(404).json({ message: 'Inventory item not found' });
         }
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
 
-// Delete product
-const deleteProduct = async (req: Request, res: Response): Promise<void> => {
-    const productId = parseInt(req.params.id, 10);
-    try {
-        await productService.deleteProduct(productId);
-        res.status(200).json({ message: 'Product deleted successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
-    }
-};
+const deleteInventoryItem = async (req: Request, res: Response): Promise<void> => {
+    const productId = req.params.productId;
 
-// Update quantity
-const updateProductQuantity = async (req: Request, res: Response): Promise<void> => {
-    const productId = parseInt(req.params.id, 10);
-    const operation = req.body.operation; // 'increment' or 'decrement'
     try {
-        const product = await productService.updateProductQuantity(productId, operation);
-        if (product) {
-            res.status(200).json(product);
+        const deletedInventoryItem = await productService.deleteInventoryItem(productId);
+        if (deletedInventoryItem) {
+            res.status(200).json(deletedInventoryItem);
         } else {
-            res.status(404).json({ message: 'Product not found' });
+            res.status(404).json({ message: 'Inventory item not found' });
         }
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
@@ -98,11 +72,9 @@ const updateProductQuantity = async (req: Request, res: Response): Promise<void>
 };
 
 export default {
-    getAllProducts,
-    getProductById,
-    createProduct,
-    updateProduct,
-    deleteProduct,
-    updateProductQuantity,
-    // getAllProductsAdmin,
+    getAllInventory,
+    getInventoryById,
+    addNewInventoryItem,
+    updateInventoryItem,
+    deleteInventoryItem,
 };
