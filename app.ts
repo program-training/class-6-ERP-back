@@ -4,7 +4,7 @@ dotenv.config()
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import productRouter from './api/product/product.router';
+import productRouter from './api/product/products.router';
 import usersRouter from './api/users/users.router';
 import { connectToDatabase } from './utils/connections.db';
 

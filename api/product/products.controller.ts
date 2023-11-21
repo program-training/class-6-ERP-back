@@ -1,6 +1,7 @@
+// product.controller.ts
 import { Request, Response } from 'express';
-import productService from './product.service';
-import { ProductCreateUpdateDTO } from './product.interfaces';
+import productService from './products.service';
+import { ShopProductInterface, CreateProductRequest, UpdateProductRequest } from './products.interface';
 
 // Get all products
 const getAllProducts = async (req: Request, res: Response): Promise<void> => {
@@ -15,9 +16,21 @@ const getAllProducts = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+const getAllProductsAdmin = async (req: Request, res: Response): Promise<void> => {
+    try {
+        console.log('Request received to get all products');
+        const products = await productService.getAllProductsAdmin();
+        console.log('Retrieved products:', products);
+        res.status(200).json(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
 // Get product by ID
 const getProductById = async (req: Request, res: Response): Promise<void> => {
-    const productId = parseInt(req.params.id, 10);
+     const productId = parseInt(req.params.id, 10);
     try {
         const product = await productService.getProductById(productId);
         if (product) {
@@ -32,7 +45,7 @@ const getProductById = async (req: Request, res: Response): Promise<void> => {
 
 // Create new product
 const createProduct = async (req: Request, res: Response): Promise<void> => {
-    const newProductData: ProductCreateUpdateDTO = req.body;
+    const newProductData: CreateProductRequest = req.body;
     try {
         const product = await productService.createProduct(newProductData);
         res.status(201).json(product);
@@ -43,8 +56,8 @@ const createProduct = async (req: Request, res: Response): Promise<void> => {
 
 // Update product
 const updateProduct = async (req: Request, res: Response): Promise<void> => {
-    const productId = parseInt(req.params.id, 10);
-    const updatedProductData: ProductCreateUpdateDTO = req.body;
+        const productId = parseInt(req.params.id, 10);
+    const updatedProductData: UpdateProductRequest = req.body;
     try {
         const product = await productService.updateProduct(productId, updatedProductData);
         if (product) {
@@ -61,16 +74,13 @@ const updateProduct = async (req: Request, res: Response): Promise<void> => {
 const deleteProduct = async (req: Request, res: Response): Promise<void> => {
     const productId = parseInt(req.params.id, 10);
     try {
-        const deletedProduct = await productService.deleteProduct(productId);
-        if (deletedProduct) {
-            res.status(200).json(deletedProduct);
-        } else {
-            res.status(404).json({ message: 'Product not found' });
-        }
+        await productService.deleteProduct(productId);
+        res.status(200).json({ message: 'Product deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
 // Update quantity
 const updateProductQuantity = async (req: Request, res: Response): Promise<void> => {
     const productId = parseInt(req.params.id, 10);
@@ -94,5 +104,5 @@ export default {
     updateProduct,
     deleteProduct,
     updateProductQuantity,
+    // getAllProductsAdmin,
 };
-
