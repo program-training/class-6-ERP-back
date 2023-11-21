@@ -1,5 +1,5 @@
-import { Product, AdminProduct } from './products.model';
-import { ShopProductInterface, CreateProductRequest, UpdateProductRequest ,AdminProductInterface} from './products.interface';
+import { Product } from './products.model';
+import { ShopProductInterface ,AdminProductInterface} from './products.interface';
 
 const productService = {
     getAllProducts: async (): Promise<ShopProductInterface[]> => {
@@ -27,17 +27,17 @@ const productService = {
         await Product.destroy({ where: { product_id: id } });
     },
 
-    updateProductQuantity: async (id: number, operation: string): Promise<ProductAttributes | null> => {
+    updateProductQuantity: async (id: number, operation: string): Promise<AdminProductInterface | null> => {
         const product = await Product.findOne({ where: { product_id: id } });
         if (!product) {
             return null; // Product not found
         }
 
-        if (operation === 'increment') {
-            product.quantity += 1;
-        } else if (operation === 'decrement' && product.quantity > 0) {
-            product.quantity -= 1;
-        }
+        // if (operation === 'increment') {
+        //     product.quantity += 1;
+        // } else if (operation === 'decrement' && product.quantity > 0) {
+        //     product.quantity -= 1;
+        // }
 
         // Save the updated product
         await product.save();

@@ -15,7 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const products_service_1 = __importDefault(require("./products.service"));
 // import { ShopProductInterface } from './products.interface';
 // Get all products
-const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllProductsOut = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log('hi');
     try {
         console.log('Request received to get all products');
         const products = yield products_service_1.default.getAllProducts();
@@ -40,7 +41,7 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
         }
     }
     catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error 2' });
     }
 });
 // Update quantity
@@ -57,11 +58,11 @@ const updateProductQuantity = (req, res) => __awaiter(void 0, void 0, void 0, fu
         }
     }
     catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error 3' });
     }
 });
 exports.default = {
-    getAllProducts,
+    getAllProductsOut,
     getProductById,
     updateProductQuantity,
 };

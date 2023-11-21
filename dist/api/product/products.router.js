@@ -13,7 +13,7 @@ router.post('/', products_controller_1.default.createProduct);
 router.put('/:id', products_controller_1.default.updateProduct);
 router.delete('/:id', products_controller_1.default.deleteProduct);
 router.patch('/:id', products_controller_1.default.updateProductQuantity);
-router.get(`/shop_inventory?search={searchText}`, products_controller_2.default.getAllProducts);
+router.get(`/shop_inventory`, products_controller_2.default.getAllProductsOut);
 router.get('/shop_inventory/:productId', products_controller_2.default.getProductById);
 router.post('/shop_inventory/updateInventory', products_controller_2.default.updateProductQuantity);
 exports.default = router;

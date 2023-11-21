@@ -36,12 +36,11 @@ const productService = {
         if (!product) {
             return null; // Product not found
         }
-        if (operation === 'increment') {
-            product.quantity += 1;
-        }
-        else if (operation === 'decrement' && product.quantity > 0) {
-            product.quantity -= 1;
-        }
+        // if (operation === 'increment') {
+        //     product.quantity += 1;
+        // } else if (operation === 'decrement' && product.quantity > 0) {
+        //     product.quantity -= 1;
+        // }
         // Save the updated product
         yield product.save();
         return product.toJSON();

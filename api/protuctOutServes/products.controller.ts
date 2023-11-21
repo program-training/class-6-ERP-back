@@ -4,7 +4,9 @@ import productService from './products.service';
 // import { ShopProductInterface } from './products.interface';
 
 // Get all products
-const getAllProducts = async (req: Request, res: Response): Promise<void> => {
+const getAllProductsOut = async (req: Request, res: Response): Promise<void> => {
+    console.log('hi');
+    
     try {
         console.log('Request received to get all products');
         const products = await productService.getAllProducts();
@@ -28,7 +30,7 @@ const getProductById = async (req: Request, res: Response): Promise<void> => {
             res.status(404).json({ message: 'Product not found' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error 2' });
     }
 };
 
@@ -44,12 +46,12 @@ const updateProductQuantity = async (req: Request, res: Response): Promise<void>
             res.status(404).json({ message: 'Product not found' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Internal server error' });
+        res.status(500).json({ message: 'Internal server error 3' });
     }
 };
 
 export default {
-    getAllProducts,
+    getAllProductsOut,
     getProductById,
     updateProductQuantity,
 };

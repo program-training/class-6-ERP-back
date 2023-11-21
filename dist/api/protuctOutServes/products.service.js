@@ -16,11 +16,11 @@ const productService = {
         return products.map((product) => product.toJSON());
     }),
     getProductById: (id) => __awaiter(void 0, void 0, void 0, function* () {
-        const product = yield products_model_1.Product.findOne({ where: { id } }); // Assuming 'id' is the correct property
+        const product = yield products_model_1.Product.findOne({ where: { product_id: id } }); // Assuming 'id' is the correct property
         return product ? product.toJSON() : null;
     }),
     updateProductQuantity: (id, operation) => __awaiter(void 0, void 0, void 0, function* () {
-        const product = yield products_model_1.Product.findOne({ where: { id } }); // Assuming 'id' is the correct property
+        const product = yield products_model_1.Product.findOne({ where: { product_id: id } }); // Assuming 'id' is the correct property
         if (!product) {
             return null; // Product not found
         }

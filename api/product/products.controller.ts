@@ -1,7 +1,6 @@
 // product.controller.ts
 import { Request, Response } from 'express';
 import productService from './products.service';
-import { ShopProductInterface, CreateProductRequest, UpdateProductRequest } from './products.interface';
 
 // Get all products
 const getAllProducts = async (req: Request, res: Response): Promise<void> => {
@@ -19,7 +18,7 @@ const getAllProducts = async (req: Request, res: Response): Promise<void> => {
 const getAllProductsAdmin = async (req: Request, res: Response): Promise<void> => {
     try {
         console.log('Request received to get all products');
-        const products = await productService.getAllProductsAdmin();
+        const products = await productService.getAllProducts();
         console.log('Retrieved products:', products);
         res.status(200).json(products);
     } catch (error) {
