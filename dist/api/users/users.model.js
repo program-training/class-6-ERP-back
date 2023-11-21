@@ -10,14 +10,16 @@ exports.AdminUser = connections_db_1.sequelize.define('admin_users', {
         autoIncrement: true,
     },
     username: {
-        type: sequelize_1.DataTypes.STRING(255),
+        type: sequelize_1.DataTypes.STRING(50),
         allowNull: false,
         unique: true,
     },
     password: {
-        type: sequelize_1.DataTypes.STRING(255),
+        type: sequelize_1.DataTypes.STRING(60),
         allowNull: false,
     },
+}, {
+    timestamps: false, // Set timestamps to false to exclude createdAt and updatedAt
 });
 // // user.model.ts
 // import { DataTypes, Model } from 'sequelize';

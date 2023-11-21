@@ -32,6 +32,7 @@ const getInventoryById = (req, res) => __awaiter(void 0, void 0, void 0, functio
         }
         else {
             res.status(404).json({ message: 'Inventory item not found' });
+
         }
     }
     catch (error) {
@@ -43,6 +44,7 @@ const addNewInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, func
     try {
         const createdInventoryItem = yield products_service_1.default.addNewInventoryItem(newInventoryItemData);
         res.status(201).json(createdInventoryItem);
+
     }
     catch (error) {
         res.status(500).json({ message: 'Internal server error' });
@@ -58,6 +60,7 @@ const updateInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, func
         }
         else {
             res.status(404).json({ message: 'Inventory item not found' });
+
         }
     }
     catch (error) {
@@ -73,6 +76,7 @@ const deleteInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, func
         }
         else {
             res.status(404).json({ message: 'Inventory item not found' });
+
         }
     }
     catch (error) {
@@ -85,4 +89,5 @@ exports.default = {
     addNewInventoryItem,
     updateInventoryItem,
     deleteInventoryItem,
+
 };

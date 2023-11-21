@@ -26,3 +26,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // export type CreateProductRequest = Omit<AdminProductAttributes, 'product_id'>;
 // // Partial AdminProductInterface for PUT request
 // export type UpdateProductRequest = Partial<AdminProductAttributes>;
+

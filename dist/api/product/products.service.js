@@ -38,6 +38,7 @@ const productService = {
         }
         yield inventoryItem.destroy();
         return inventoryItem.toJSON();
+
     }),
 };
 exports.default = productService;

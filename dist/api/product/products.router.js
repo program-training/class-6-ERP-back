@@ -23,4 +23,5 @@ router.delete('/api/inventory/:productId', products_controller_1.default.deleteI
 // router.post('/api/shop_inventory/updateInventory', shopController.updateShopInventory);
 // getAllProductsAdmin
 // router.get('/', productController.getAllProductsAdmin);
+
 exports.default = router;
