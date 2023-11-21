@@ -35,6 +35,10 @@ export const Product = sequelize.define('products', {
     image_alt: {
         type: DataTypes.STRING(255),
     },
+    
+    
+},{
+    timestamps: false,
 });
 
 // AdminProduct Model (Extends Product Model for Admin Specific Fields)
@@ -54,6 +58,8 @@ export const AdminProduct = sequelize.define('admin_products', {
     supplier: {
         type: DataTypes.STRING(255),
     },
+},{
+    timestamps: false,
 });
 
 // Define foreign key relationship between AdminProduct and Product

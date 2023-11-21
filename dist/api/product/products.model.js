@@ -37,6 +37,8 @@ exports.Product = connections_db_1.sequelize.define('products', {
     image_alt: {
         type: sequelize_1.DataTypes.STRING(255),
     },
+}, {
+    timestamps: false,
 });
 // AdminProduct Model (Extends Product Model for Admin Specific Fields)
 exports.AdminProduct = connections_db_1.sequelize.define('admin_products', {
@@ -55,6 +57,8 @@ exports.AdminProduct = connections_db_1.sequelize.define('admin_products', {
     supplier: {
         type: sequelize_1.DataTypes.STRING(255),
     },
+}, {
+    timestamps: false,
 });
 // Define foreign key relationship between AdminProduct and Product
 exports.AdminProduct.belongsTo(exports.Product, { foreignKey: 'product_id' });

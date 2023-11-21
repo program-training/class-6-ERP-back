@@ -1,7 +1,7 @@
+"use strict";
 // import { DataTypes, Model, UUIDV4 } from 'sequelize';
 // import sequelize from './sequelize.config';
 // import { ShopProductInterface } from "./interface.products"
-
 // class ShopProductModel extends Model implements ShopProductInterface {
 //   public id!: string;
 //   public name!: string;
@@ -11,10 +11,7 @@
 //   public category!: string;
 //   public discountPercentage!: number;
 //   public image!: { url: string; alt: string };
-
-
 // }
-
 // ShopProductModel.init(
 //   {
 //     id: {
@@ -56,19 +53,14 @@
 //     modelName: 'ShopProduct',
 //   }
 // );
-
 // class AdminProductModel extends Model {
 //   public isForSale!: boolean;
 //   public costPrice!: number;
 //   public supplier!: string;
-
 //   // Include fields from ShopProductModel
 //   public readonly ShopProduct!: ShopProductModel;
-
 //   // Other methods or class members can be added here if needed
-
 // }
-
 // AdminProductModel.init(
 //   {
 //     isForSale: {
@@ -89,8 +81,6 @@
 //     modelName: 'AdminProduct',
 //   }
 // );
-
 // // Establish association between AdminProductModel and ShopProductModel
 // AdminProductModel.belongsTo(ShopProductModel, { foreignKey: 'id', targetKey: 'id' });
-
 // export { ShopProductModel, AdminProductModel };

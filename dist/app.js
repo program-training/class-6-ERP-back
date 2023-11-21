@@ -12,7 +12,8 @@ const cors_1 = __importDefault(require("cors"));
 const product_router_1 = __importDefault(require("./api/product/product.router"));
 const users_router_1 = __importDefault(require("./api/users/users.router"));
 const connections_db_1 = require("./utils/connections.db");
-const port = process.env.PORT;
+// const port = process.env.PORT
+const port = 8200;
 (0, connections_db_1.connectToDatabase)();
 exports.app = (0, express_1.default)();
 exports.app.use((0, cors_1.default)());

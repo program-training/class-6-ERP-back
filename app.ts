@@ -8,7 +8,9 @@ import productRouter from './api/product/product.router';
 import usersRouter from './api/users/users.router';
 import { connectToDatabase } from './utils/connections.db';
 
-const port = process.env.PORT
+// const port = process.env.PORT
+
+const port = 8200
 
 connectToDatabase()
 
