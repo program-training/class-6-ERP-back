@@ -19,7 +19,7 @@ router.get('/inventory/:productId', products_controller_1.default.getInventoryBy
 router.post('/inventory', products_controller_1.default.addNewInventoryItem);
 // Updates an inventory item
 router.put('/inventory/:productId', products_controller_1.default.updateInventoryItem);
-router.use(middleware_1.authenticateToken);
 // Deletes an inventory item
 router.delete('/inventory/:productId', products_controller_1.default.deleteInventoryItem);
+router.use(middleware_1.authenticateToken);
 exports.default = router;
