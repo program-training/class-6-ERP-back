@@ -1,6 +1,7 @@
 import express from "express";
 import productController from "./products.controller";
 import shopController from "../protuctOutServes/products.controller"
+
 const router = express.Router();
 
 router.get('/', productController.getAllProducts);

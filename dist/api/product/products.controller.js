@@ -29,7 +29,7 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
 const getAllProductsAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         console.log('Request received to get all products');
-        const products = yield products_service_1.default.getAllProductsAdmin();
+        const products = yield products_service_1.default.getAllProducts();
         console.log('Retrieved products:', products);
         res.status(200).json(products);
     }

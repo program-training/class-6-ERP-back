@@ -31,52 +31,48 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerUser = exports.loginUser = void 0;
-const users_model_1 = require("./users.model");
-const handelUsers = __importStar(require("./users.handler"));
-const usersValidation = __importStar(require("./users.validation"));
-const loginUser = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username, password } = reqBody;
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const userService = __importStar(require("./users.service"));
+const SECRET_KEY = 'your-secret-key';
+const generateToken = (userId) => {
+    return jsonwebtoken_1.default.sign({ userId }, SECRET_KEY, { expiresIn: '3h' });
+};
+const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const user = yield users_model_1.AdminUser.findOne({
-            where: { username: username }
-        });
-        if (!user) {
-            return { content: { message: 'User not found' }, status: 404 };
-        }
-        if (yield handelUsers.comparePasswrd(reqBody.password, user.password)) {
-            return { content: user, status: 200 };
+        const user = yield userService.loginUser(req.body);
+        if (user) {
+            const token = generateToken('user');
+            res.json({ user, token });
         }
         else {
-            return { content: { message: 'Incorrect password' }, status: 401 };
+            res.json(' is not logged in');
         }
     }
     catch (err) {
         console.error(err);
-        return { content: { message: 'Internal Server Error' }, status: 500 };
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 });
 exports.loginUser = loginUser;
-const registerUser = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username, password } = reqBody;
+const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        if (!usersValidation.newUserValidator(password)) {
-            return { message: 'The password must contain 7 characters with at least one uppercase letter and one lowercase letter.', status: 400 };
+        const userCreationResult = yield userService.registerUser(req.body);
+        // Check the status and send appropriate response
+        if (userCreationResult.status === 201) {
+            res.status(userCreationResult.status).json({ user: userCreationResult.user, message: 'User created successfully' });
         }
-        else if (yield usersValidation.ifInDB(reqBody)) {
-            return { message: 'User already exists', status: 409 };
+        else {
+            res.status(userCreationResult.status).json({ message: userCreationResult.message });
         }
-        const passwordHashed = yield handelUsers.hashPassword(password);
-        const user = yield users_model_1.AdminUser.create({
-            username: username,
-            password: passwordHashed,
-        });
-        return { user: user, status: 201 }; // 201 Created
     }
     catch (error) {
-        console.error('An error occurred while creating a new user:', error);
-        throw error;
+        console.error('An error occurred while processing the request:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
 exports.registerUser = registerUser;

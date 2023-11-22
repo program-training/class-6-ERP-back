@@ -9,19 +9,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectToDatabase = exports.sequelize = void 0;
-const sequelize_1 = require("sequelize");
-// const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
-exports.sequelize = new sequelize_1.Sequelize("postgres://hfqxkawb:bypOr7eSKuoFtbECdrKcQOLNNNMfzHqj@cornelius.db.elephantsql.com/hfqxkawb"); // Example for postgres
-function connectToDatabase() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield exports.sequelize.authenticate();
-            console.log('Connection has been established successfully.');
-        }
-        catch (error) {
-            console.error('Unable to connect to the database:', error);
-        }
-    });
-}
-exports.connectToDatabase = connectToDatabase;
+exports.ifInDB = exports.newUserValidator = void 0;
+const newUserValidator = (password) => {
+    const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$!%*?&]{7,12}$/;
+    return password.length >= 7 && passwordRegex.test(password);
+};
+exports.newUserValidator = newUserValidator;
+const ifInDB = (objectUser) => __awaiter(void 0, void 0, void 0, function* () {
+    const userFromDB = yield UserModel.findOne({ email: objectUser.email });
+    return userFromDB !== null;
+});
+exports.ifInDB = ifInDB;
