@@ -45,7 +45,7 @@ const loginUser = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
         if (!user) {
             return { content: { message: 'User not found' }, status: 404 };
         }
-        if (yield handelUsers.comparePasswrd(reqBody.password, user.password)) {
+        if (yield handelUsers.comparePasswrd(password, user.password)) {
             return { content: user, status: 200 };
         }
         else {
