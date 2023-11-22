@@ -4,8 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const middleware_1 = require("./middleware");
 const products_controller_1 = __importDefault(require("./products.controller"));
 const router = express_1.default.Router();
+router.use(middleware_1.authenticateToken);
+
 // Returns all inventory items
 router.get('/api/inventory', products_controller_1.default.getAllInventory);
 // Returns a specific inventory item

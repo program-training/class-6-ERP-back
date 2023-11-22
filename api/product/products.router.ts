@@ -1,7 +1,11 @@
 import express from "express";
+import { authenticateToken } from "./middleware";
 import productController from "./products.controller";
 
 const router = express.Router();
+
+
+router.use(authenticateToken);
 
 // Returns all inventory items
 router.get('/api/inventory', productController.getAllInventory);
@@ -17,8 +21,6 @@ router.put('/api/inventory/:productId', productController.updateInventoryItem);
 
 // Deletes an inventory item
 router.delete('/api/inventory/:productId', productController.deleteInventoryItem);
-
-
 
 
 

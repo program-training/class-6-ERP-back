@@ -10,12 +10,12 @@ exports.AdminUser = connections_db_1.sequelize.define('admin_users', {
         autoIncrement: true,
     },
     username: {
-        type: sequelize_1.DataTypes.STRING(50),
+        type: sequelize_1.DataTypes.STRING(200),
         allowNull: false,
         unique: true,
     },
     password: {
-        type: sequelize_1.DataTypes.STRING(60),
+        type: sequelize_1.DataTypes.STRING(200),
         allowNull: false,
     },
 }, {
