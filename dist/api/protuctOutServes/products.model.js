@@ -6,16 +6,16 @@ const connections_db_1 = require("../../utils/connections.db");
 const sequelize_1 = require("sequelize");
 // Product Model
 exports.Product = connections_db_1.sequelize.define('products', {
-    id: {
-        type: sequelize_1.DataTypes.UUID,
-        defaultValue: sequelize_1.DataTypes.UUIDV4,
+    product_id: {
+        type: sequelize_1.DataTypes.INTEGER,
+        defaultValue: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
     },
     name: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    salePrice: {
+    sale_price: {
         type: sequelize_1.DataTypes.FLOAT,
         allowNull: false,
     },
@@ -31,12 +31,12 @@ exports.Product = connections_db_1.sequelize.define('products', {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
-    discountPercentage: {
+    discount_percentage: {
         type: sequelize_1.DataTypes.FLOAT,
         allowNull: false,
     },
     image: {
-        type: sequelize_1.DataTypes.JSONB,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 }, {

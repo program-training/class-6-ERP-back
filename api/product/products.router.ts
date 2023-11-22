@@ -12,7 +12,7 @@ router.delete('/:id', productController.deleteProduct);
 router.patch('/:id', productController.updateProductQuantity);
 
 
-router.get(`/shop_inventory?search={searchText}`, shopController.getAllProducts);
+router.get(`/shop_inventory`, shopController.getAllProductsOut);
 router.get('/shop_inventory/:productId', shopController.getProductById);
 router.post('/shop_inventory/updateInventory', shopController.updateProductQuantity);
 

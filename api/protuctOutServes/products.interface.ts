@@ -1,12 +1,12 @@
 // product.interface.ts
 export interface ShopProductInterface {
-    id: string;
+    product_id: string;
     name: string;
-    salePrice: number;
+    sale_price: number;
     quantity: number;
     description: string;
     category: string;
-    discountPercentage: number;
+    discount_percentage: number;
     image: {
         url: string;
         alt: string;

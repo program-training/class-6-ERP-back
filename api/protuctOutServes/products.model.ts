@@ -5,21 +5,21 @@ import { ShopProductInterface } from './products.interface';
 
 // Product Model
 export const Product = sequelize.define<Model<ShopProductInterface>>('products', {
-    id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+    product_id: {
+        type: DataTypes.INTEGER,
+        defaultValue: DataTypes.INTEGER,
         primaryKey: true,
     },
     name: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    salePrice: {
-        type: DataTypes.FLOAT,
+    sale_price: {
+        type: DataTypes.FLOAT, // Check if FLOAT is the appropriate type for your use case
         allowNull: false,
     },
     quantity: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.INTEGER, // Check if INTEGER is the appropriate type for your use case
         allowNull: false,
     },
     description: {
@@ -30,15 +30,14 @@ export const Product = sequelize.define<Model<ShopProductInterface>>('products',
         type: DataTypes.STRING,
         allowNull: false,
     },
-    discountPercentage: {
-        type: DataTypes.FLOAT,
+    discount_percentage: {
+        type: DataTypes.FLOAT, // Check if FLOAT is the appropriate type for your use case
         allowNull: false,
     },
     image: {
-        type: DataTypes.JSONB,
+        type: DataTypes.STRING, // Adjust if storing image URLs
         allowNull: false,
     },
-},
-{
+}, {
     timestamps: false, // Disable timestamps
 });
