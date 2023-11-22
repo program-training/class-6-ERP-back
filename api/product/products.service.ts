@@ -1,5 +1,5 @@
 import { Product, AdminProduct } from './products.model';
-import { ShopProductInterface ,AdminProductInterface} from './products.interface';
+import { ShopProductInterface ,AdminProductInterface,ProductCreateInput} from './products.interface';
 
 
 const productService = {
@@ -31,10 +31,10 @@ const productService = {
                 supplier: string;
             };
         }
-    ): Promise<{ adminProduct: AdminProductInterface; product: ShopProductInterface }> => {
+    ): Promise<{ adminProduct: AdminProductInterface; product: ShopProductInterface | null }> => {
         try {
             // Create a new Product
-            const createdProduct = await Product.create(newInventoryItemData.product);
+            const createdProduct = await Product.create(newInventoryItemData.product as ProductCreateInput) as unknown as ShopProductInterface;
     
             // Create a new AdminProduct with additional properties
             const createdAdminProduct = await AdminProduct.create({
@@ -49,15 +49,15 @@ const productService = {
     
             return {
                 adminProduct: createdAdminProduct.toJSON() as AdminProductInterface,
-                product: retrievedProduct ? retrievedProduct.toJSON() as ShopProductInterface : null,
+                product: retrievedProduct ? (retrievedProduct.toJSON() as ShopProductInterface) : null,
             };
         } catch (error) {
             console.error('Error creating new inventory item:', error);
             throw new Error('Error creating new inventory item');
         }
     },
-
-
+    
+    
     updateInventoryItem: async (
         productId: string,
         updatedInventoryItemData: Partial<AdminProductInterface>
