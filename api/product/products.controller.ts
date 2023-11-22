@@ -1,7 +1,6 @@
 // product.controller.ts
 import { Request, Response } from 'express';
 import productService from './products.service';
-import { ShopProductInterface, CreateProductRequest, UpdateProductRequest ,AdminProductInterface} from './products.interface';
 
 
 const getAllInventory = async (req: Request, res: Response): Promise<void> => {
