@@ -2,6 +2,7 @@ import { AdminUser } from "./users.model";
 import { User } from "./users.interface";
 import * as handelUsers from './users.handler'
 import * as usersValidation from './users.validation';
+import { Model } from "mongoose";
 
 export const loginUser = async (reqBody: User) => {
 
@@ -10,11 +11,11 @@ export const loginUser = async (reqBody: User) => {
     try {
         const user = await AdminUser.findOne({
             where: { username: username }
-        });
+        });                
         if (!user) {
             return { content: { message: 'User not found' }, status: 404 };
         }
-        if (await handelUsers.comparePasswrd(reqBody.password, user.password)) {
+        if (await handelUsers.comparePasswrd(password, user.dataValues.password)) {
             return { content: user, status: 200 };
         } else {
             return { content: { message: 'Incorrect password' }, status: 401 };

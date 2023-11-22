@@ -13,9 +13,9 @@ export const loginUser = async (req: Request, res: Response) => {
     const user = await userService.loginUser(req.body);
     if (user){
       const token = generateToken(SECRET_KEY);
-      res.json({ user, token });
+      res.status(user.status).json({ token });
     } else {
-      res.status(2).json(' is not logged in');
+      res.json(' is not logged in');
     }
   } catch (err) {
     console.error(err);
