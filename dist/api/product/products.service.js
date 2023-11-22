@@ -28,7 +28,7 @@ const productService = {
     }),
     addNewInventoryItem: (newInventoryItemData) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            // Create a new Product
+            // Create a new Product            
             const createdProduct = yield products_model_1.Product.create(newInventoryItemData.product);
             // Create a new AdminProduct with additional properties
             const createdAdminProduct = yield products_model_1.AdminProduct.create(Object.assign(Object.assign({}, newInventoryItemData.Admin_Products), { product_id: createdProduct.product_id }));

@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config()
-
+import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -10,11 +10,15 @@ import { connectToDatabase } from './utils/connections.db';
 
 // const port = process.env.PORT
 
+
 const port = 8200
 
 connectToDatabase()
 
 export const app = express();
+
+app.use(bodyParser.json({ limit: '4mb' }));
+app.use(bodyParser.urlencoded({ limit: '4mb', extended: true }));
 
 app.use(cors());
 
