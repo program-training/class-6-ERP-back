@@ -11,39 +11,65 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_model_1 = require("./products.model");
 const productService = {
-    getAllProducts: () => __awaiter(void 0, void 0, void 0, function* () {
-        const products = yield products_model_1.Product.findAll();
-        return products.map((product) => product.toJSON());
+    getAllInventory: () => __awaiter(void 0, void 0, void 0, function* () {
+        const inventory = yield products_model_1.AdminProduct.findAll({
+            include: [products_model_1.Product],
+            raw: true,
+        });
+        return inventory;
     }),
-    getProductById: (id) => __awaiter(void 0, void 0, void 0, function* () {
-        const product = yield products_model_1.Product.findOne({ where: { product_id: id } });
-        return product ? product.toJSON() : null;
+    getInventoryById: (productId) => __awaiter(void 0, void 0, void 0, function* () {
+        const inventoryItem = yield products_model_1.AdminProduct.findOne({
+            where: { product_id: productId },
+            include: [products_model_1.Product],
+            raw: true,
+        });
+        return inventoryItem ? inventoryItem : null;
     }),
-    createProduct: (product) => __awaiter(void 0, void 0, void 0, function* () {
-        const createdProduct = yield products_model_1.Product.create(product);
-        return createdProduct.toJSON();
-    }),
-    updateProduct: (id, updatedProduct) => __awaiter(void 0, void 0, void 0, function* () {
-        yield products_model_1.Product.update(updatedProduct, { where: { product_id: id } });
-        const product = yield products_model_1.Product.findOne({ where: { product_id: id } });
-        return product ? product.toJSON() : null;
-    }),
-    deleteProduct: (id) => __awaiter(void 0, void 0, void 0, function* () {
-        yield products_model_1.Product.destroy({ where: { product_id: id } });
-    }),
-    updateProductQuantity: (id, operation) => __awaiter(void 0, void 0, void 0, function* () {
-        const product = yield products_model_1.Product.findOne({ where: { product_id: id } });
-        if (!product) {
-            return null; // Product not found
+    addNewInventoryItem: (newInventoryItemData) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            // Create a new Product
+            const createdProduct = yield products_model_1.Product.create(newInventoryItemData.product);
+            // Create a new AdminProduct with additional properties
+            const createdAdminProduct = yield products_model_1.AdminProduct.create(Object.assign(Object.assign({}, newInventoryItemData.Admin_Products), { product_id: createdProduct.product_id }));
+            // Retrieve the created Product
+            const retrievedProduct = yield products_model_1.Product.findOne({
+                where: { product_id: createdProduct.product_id },
+            });
+            return {
+                adminProduct: createdAdminProduct.toJSON(),
+                product: retrievedProduct ? retrievedProduct.toJSON() : null,
+            };
         }
-        // if (operation === 'increment') {
-        //     product.quantity += 1;
-        // } else if (operation === 'decrement' && product.quantity > 0) {
-        //     product.quantity -= 1;
-        // }
-        // Save the updated product
-        yield product.save();
-        return product.toJSON();
+        catch (error) {
+            console.error('Error creating new inventory item:', error);
+            throw new Error('Error creating new inventory item');
+        }
+    }),
+    updateInventoryItem: (productId, updatedInventoryItemData) => __awaiter(void 0, void 0, void 0, function* () {
+        const inventoryItem = yield products_model_1.AdminProduct.findOne({
+            where: { product_id: productId },
+            include: [products_model_1.Product],
+        });
+        if (!inventoryItem) {
+            return null;
+        }
+        yield inventoryItem.update(updatedInventoryItemData);
+        return inventoryItem.toJSON();
+    }),
+    deleteInventoryItem: (productId) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const inventoryItem = yield products_model_1.AdminProduct.findOne({ where: { product_id: productId } });
+            if (!inventoryItem) {
+                return { success: false, message: 'Inventory item not found.' };
+            }
+            yield inventoryItem.destroy();
+            return { success: true, message: 'Inventory item deleted successfully.' };
+        }
+        catch (error) {
+            console.error('Error deleting inventory item:', error);
+            throw new Error('Error deleting inventory item');
+        }
     }),
 };
 exports.default = productService;

@@ -17,7 +17,6 @@ const productService = {
     if (!product) {
       return null; // Product not found
     }
-    console.log(operation);
     
     if (operation === 'increment') {
       product.quantity += 1;
