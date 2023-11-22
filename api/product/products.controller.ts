@@ -15,8 +15,22 @@ const getAllInventory = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
+<<<<<<< HEAD
+const getAllProductsAdmin = async (req: Request, res: Response): Promise<void> => {
+    try {
+        console.log('Request received to get all products');
+        const products = await productService.getAllProducts();
+        console.log('Retrieved products:', products);
+        res.status(200).json(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+=======
 const getInventoryById = async (req: Request, res: Response): Promise<void> => {
     const productId = req.params.productId;
+>>>>>>> f29048bcafdcb750f3f01860ba7a9932e252dccc
 
     try {
         const inventoryItem = await productService.getInventoryById(productId);
@@ -76,9 +90,19 @@ const deleteInventoryItem = async (req: Request, res: Response): Promise<void> =
 };
 
 export default {
+<<<<<<< HEAD
+    getAllProducts,
+    getProductById,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+    updateProductQuantity,
+    getAllProductsAdmin,
+=======
     getAllInventory,
     getInventoryById,
     addNewInventoryItem,
     updateInventoryItem,
     deleteInventoryItem,
+>>>>>>> f29048bcafdcb750f3f01860ba7a9932e252dccc
 };
