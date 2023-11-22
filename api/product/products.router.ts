@@ -11,19 +11,20 @@ router.post('/shop_inventory/updateInventory/:productId', shopController.updateP
 
 
 
+
+// Returns all inventory items
+router.get('/inventory', productController.getAllInventory);
+// Returns a specific inventory item
+router.get('/inventory/:productId', productController.getInventoryById);
+// Adds a new inventory item
+router.post('/inventory', productController.addNewInventoryItem);
+// Updates an inventory item
+router.put('/inventory/:productId', productController.updateInventoryItem);
 router.use(authenticateToken);
 
-// // Returns all inventory items
-// router.get('/api/inventory', productController.getAllInventory);
 
-// // Returns a specific inventory item
-// router.get('/api/inventory/:productId', productController.getInventoryById);
-// // Adds a new inventory item
-// router.post('/api/inventory', productController.addNewInventoryItem);
-// // Updates an inventory item
-// router.put('/api/inventory/:productId', productController.updateInventoryItem);
-// // Deletes an inventory item
-// router.delete('/api/inventory/:productId', productController.deleteInventoryItem);
+// Deletes an inventory item
+router.delete('/inventory/:productId', productController.deleteInventoryItem);
 
 
 

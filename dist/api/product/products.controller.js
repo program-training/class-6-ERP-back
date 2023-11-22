@@ -23,31 +23,21 @@ const getAllInventory = (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-const getAllProductsAdmin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getInventoryById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const productId = req.params.productId;
     try {
-        console.log('Request received to get all products');
-        const products = yield products_service_1.default.getAllProducts();
-        console.log('Retrieved products:', products);
-        res.status(200).json(products);
+        const inventoryItem = yield products_service_1.default.getInventoryById(productId);
+        if (inventoryItem) {
+            res.status(200).json(inventoryItem);
+        }
+        else {
+            res.status(404).json({ message: 'Inventory item not found' });
+        }
     }
     catch (error) {
-        console.error('Error fetching products:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-try {
-    const inventoryItem = await products_service_1.default.getInventoryById(productId);
-    if (inventoryItem) {
-        res.status(200).json(inventoryItem);
-    }
-    else {
-        res.status(404).json({ message: 'Inventory item not found' });
-    }
-}
-catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
-}
-;
 const addNewInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newInventoryItemData = req.body;
     try {
@@ -90,11 +80,9 @@ const deleteInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, func
     }
 });
 exports.default = {
-    getAllProducts,
-    getProductById,
-    createProduct,
-    updateProduct,
-    deleteProduct,
-    updateProductQuantity,
-    getAllProductsAdmin,
+    getAllInventory,
+    getInventoryById,
+    addNewInventoryItem,
+    updateInventoryItem,
+    deleteInventoryItem,
 };
