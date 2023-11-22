@@ -1,15 +1,15 @@
-
 // product.interface.ts
 export interface ShopProductInterface {
     product_id?: string;
     name: string;
-    salePrice: number;
+    sale_Price: number;
     quantity: number;
     description: string;
     category: string;
-    discountPercentage: number;
+    discount_Percentage: number;
     image_url: string;
-    image_alt: string;    
+    image_alt: string;
+    
 }
 
 export interface AdminProductInterface extends ShopProductInterface {
@@ -19,6 +19,13 @@ export interface AdminProductInterface extends ShopProductInterface {
     supplier: string;
 }
 
-export type CreateProductRequest = Omit<AdminProductInterface, 'product_id'>;
-export type UpdateProductRequest = Partial<AdminProductInterface>;
 
+// export type CreateProductRequest = Omit<AdminProductInterface, 'product_id'>;
+// export type UpdateProductRequest = Partial<AdminProductInterface>;
+export type ProductCreateInput = Omit<ShopProductInterface, 'product_id'>;
+
+
+
+
+
+// export type CreateProductRequest = Omit<ShopProductInterface, 'product_id'>;
