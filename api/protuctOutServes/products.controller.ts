@@ -5,12 +5,9 @@ import productService from './products.service';
 
 // Get all products
 const getAllProductsOut = async (req: Request, res: Response): Promise<void> => {
-    console.log('hi');
     
     try {
-        console.log('Request received to get all products');
         const products = await productService.getAllProducts();
-        console.log('Retrieved products:', products);
         res.status(200).json(products);
     } catch (error) {
         console.error('Error fetching products 1:', error);
@@ -21,9 +18,13 @@ const getAllProductsOut = async (req: Request, res: Response): Promise<void> => 
 
 // Get product by ID
 const getProductById = async (req: Request, res: Response): Promise<void> => {
-     const productId = parseInt(req.params.id, 10);
+    const productId = (req.params.productId);
+    console.log(productId);
+    
     try {
         const product = await productService.getProductById(productId);
+        console.log(product);
+        
         if (product) {
             res.status(200).json(product);
         } else {
@@ -36,8 +37,9 @@ const getProductById = async (req: Request, res: Response): Promise<void> => {
 
 // Update quantity
 const updateProductQuantity = async (req: Request, res: Response): Promise<void> => {
-    const productId = parseInt(req.params.id, 10);
+    const productId = (req.params.productId);
     const operation = req.body.operation; // 'increment' or 'decrement'
+    
     try {
         const product = await productService.updateProductQuantity(productId, operation);
         if (product) {

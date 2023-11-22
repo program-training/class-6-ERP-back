@@ -7,7 +7,7 @@ import { ShopProductInterface } from './products.interface';
 export const Product = sequelize.define<Model<ShopProductInterface>>('products', {
     product_id: {
         type: DataTypes.INTEGER,
-        defaultValue: DataTypes.INTEGER,
+        autoIncrement: true, // Added autoIncrement for primary key
         primaryKey: true,
     },
     name: {
@@ -15,11 +15,11 @@ export const Product = sequelize.define<Model<ShopProductInterface>>('products',
         allowNull: false,
     },
     sale_price: {
-        type: DataTypes.FLOAT, // Check if FLOAT is the appropriate type for your use case
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
     quantity: {
-        type: DataTypes.INTEGER, // Check if INTEGER is the appropriate type for your use case
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
     description: {
@@ -31,13 +31,17 @@ export const Product = sequelize.define<Model<ShopProductInterface>>('products',
         allowNull: false,
     },
     discount_percentage: {
-        type: DataTypes.FLOAT, // Check if FLOAT is the appropriate type for your use case
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
-    image: {
-        type: DataTypes.STRING, // Adjust if storing image URLs
+    image_url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    image_alt: { // Added a colon here
+        type: DataTypes.STRING,
         allowNull: false,
     },
 }, {
-    timestamps: false, // Disable timestamps
+    timestamps: false,
 });

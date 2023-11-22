@@ -16,11 +16,8 @@ const products_service_1 = __importDefault(require("./products.service"));
 // import { ShopProductInterface } from './products.interface';
 // Get all products
 const getAllProductsOut = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log('hi');
     try {
-        console.log('Request received to get all products');
         const products = yield products_service_1.default.getAllProducts();
-        console.log('Retrieved products:', products);
         res.status(200).json(products);
     }
     catch (error) {
@@ -30,9 +27,11 @@ const getAllProductsOut = (req, res) => __awaiter(void 0, void 0, void 0, functi
 });
 // Get product by ID
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = parseInt(req.params.id, 10);
+    const productId = (req.params.productId);
+    console.log(productId);
     try {
         const product = yield products_service_1.default.getProductById(productId);
+        console.log(product);
         if (product) {
             res.status(200).json(product);
         }
@@ -46,7 +45,7 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 // Update quantity
 const updateProductQuantity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = parseInt(req.params.id, 10);
+    const productId = (req.params.productId);
     const operation = req.body.operation; // 'increment' or 'decrement'
     try {
         const product = yield products_service_1.default.updateProductQuantity(productId, operation);

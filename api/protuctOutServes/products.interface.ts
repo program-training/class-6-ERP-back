@@ -7,10 +7,8 @@ export interface ShopProductInterface {
     description: string;
     category: string;
     discount_percentage: number;
-    image: {
-        url: string;
-        alt: string;
-    };
+    image_url: string;
+    image_alt: string;
 }
 
 

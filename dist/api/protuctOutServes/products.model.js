@@ -8,7 +8,7 @@ const sequelize_1 = require("sequelize");
 exports.Product = connections_db_1.sequelize.define('products', {
     product_id: {
         type: sequelize_1.DataTypes.INTEGER,
-        defaultValue: sequelize_1.DataTypes.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
     },
     name: {
@@ -35,10 +35,14 @@ exports.Product = connections_db_1.sequelize.define('products', {
         type: sequelize_1.DataTypes.FLOAT,
         allowNull: false,
     },
-    image: {
+    image_url: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    image_alt: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 }, {
-    timestamps: false, // Disable timestamps
+    timestamps: false,
 });
