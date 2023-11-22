@@ -23,3 +23,9 @@ export interface AdminProductInterface extends ShopProductInterface {
 
 export type CreateProductRequest = Omit<AdminProductInterface, 'product_id'>;
 export type UpdateProductRequest = Partial<AdminProductInterface>;
+
+
+
+
+
+// export type CreateProductRequest = Omit<ShopProductInterface, 'product_id'>;
