@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import * as userService from './users.service';
 
-const SECRET_KEY = 'your-secret-key';
+const SECRET_KEY = 'erp';
 
 const generateToken = (userId: string) => {
   return jwt.sign({ userId }, SECRET_KEY, { expiresIn: '3h' });
@@ -12,10 +12,10 @@ export const loginUser = async (req: Request, res: Response) => {
   try {
     const user = await userService.loginUser(req.body);
     if (user){
-      const token = generateToken('user');
+      const token = generateToken(SECRET_KEY);
       res.json({ user, token });
     } else {
-      res.json(' is not logged in');
+      res.status(2).json(' is not logged in');
     }
   } catch (err) {
     console.error(err);

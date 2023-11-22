@@ -38,7 +38,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerUser = exports.loginUser = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userService = __importStar(require("./users.service"));
-const SECRET_KEY = 'your-secret-key';
+const SECRET_KEY = 'erp';
 const generateToken = (userId) => {
     return jsonwebtoken_1.default.sign({ userId }, SECRET_KEY, { expiresIn: '3h' });
 };
@@ -46,11 +46,11 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield userService.loginUser(req.body);
         if (user) {
-            const token = generateToken('user');
+            const token = generateToken(SECRET_KEY);
             res.json({ user, token });
         }
         else {
-            res.json(' is not logged in');
+            res.status(2).json(' is not logged in');
         }
     }
     catch (err) {
