@@ -35,9 +35,9 @@ const productService = {
         }
     ): Promise<{ adminProduct: AdminProductInterface; product: ShopProductInterface | null }> => {
         try {
-            // Create a new Product
+            // Create a new Product            
             const createdProduct = await Product.create(newInventoryItemData.product as ProductCreateInput) as unknown as ShopProductInterface;
-    
+            
             // Create a new AdminProduct with additional properties
             const createdAdminProduct = await AdminProduct.create({
                 ...newInventoryItemData.Admin_Products,

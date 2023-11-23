@@ -18,7 +18,7 @@ const port = 8200;
 exports.app = (0, express_1.default)();
 exports.app.use((0, cors_1.default)());
 exports.app.use((0, morgan_1.default)('dev'));
-exports.app.use(express_1.default.json());
+exports.app.use(express_1.default.json({ limit: '50mb' }));
 exports.app.use('/api/products', products_router_1.default);
 exports.app.use('/api/users', users_router_1.default);
 exports.app.get('/', (req, res) => {

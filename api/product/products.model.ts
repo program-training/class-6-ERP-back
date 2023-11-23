@@ -30,7 +30,7 @@ export const Product = sequelize.define('products', {
         type: DataTypes.DECIMAL,
     },
     image_url: {
-        type: DataTypes.STRING(255),
+        type: DataTypes.TEXT,
     },
     image_alt: {
         type: DataTypes.STRING(255),
