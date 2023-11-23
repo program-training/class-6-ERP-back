@@ -42,7 +42,8 @@ export const Product = sequelize.define('products', {
 });
 
 // AdminProduct Model (Extends Product Model for Admin Specific Fields)
-export const AdminProduct = sequelize.define('admin_products', {
+export const AdminProduct = sequelize.define('admin_products', 
+{
     product_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -58,9 +59,13 @@ export const AdminProduct = sequelize.define('admin_products', {
     supplier: {
         type: DataTypes.STRING(255),
     },
-},{
+},
+
+{
     timestamps: false,
-});
+}
+
+);
 
 // Define foreign key relationship between AdminProduct and Product
 AdminProduct.belongsTo(Product, { foreignKey: 'product_id' });
