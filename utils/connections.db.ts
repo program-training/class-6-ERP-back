@@ -1,18 +1,19 @@
 import { Sequelize } from 'sequelize';
 
-const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
+// const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
 
-export const sequelize = new Sequelize(connectToDatabaseString as string,{
+export const sequelize = new Sequelize("postgres://hfqxkawb:bypOr7eSKuoFtbECdrKcQOLNNNMfzHqj@cornelius.db.elephantsql.com/hfqxkawb" ,{
+
+
     pool: {
         max: 1500,
         min: 0,
         acquire: 30000,
         idle: 10000
       }
-}
-   
-    )
- // Example for postgres
+    }
+
+) // Example for postgres
 
 
 export async function connectToDatabase() {
