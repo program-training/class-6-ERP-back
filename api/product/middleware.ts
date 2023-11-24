@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 const SECRET_KEY = 'erp';
 
 export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
-  const token = req.header('Authorization')?.split(' ')[1];
+  const token = req.header('Authorization');
 
   if (!token) {
     return res.status(401).json({ message: 'Unauthorized: Missing token' });
