@@ -11,6 +11,9 @@ router.post('/shop_inventory/updateInventory/:productId', shopController.updateP
 
 router.use(authenticateToken);
 
+//Add product 
+router.post('/inventory', productController.addNewInventoryItem)
+
 // Returns all inventory items
 router.get('/inventory', productController.getAllInventory);
 

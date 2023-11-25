@@ -12,6 +12,8 @@ router.get(`/shop_inventory`, products_controller_2.default.getAllProductsOut);
 router.get('/shop_inventory/:productId', products_controller_2.default.getProductById);
 router.post('/shop_inventory/updateInventory/:productId', products_controller_2.default.updateProductQuantity);
 router.use(middleware_1.authenticateToken);
+//Add product 
+router.post('/inventory');
 // Returns all inventory items
 router.get('/inventory', products_controller_1.default.getAllInventory);
 // Returns a specific inventory item
