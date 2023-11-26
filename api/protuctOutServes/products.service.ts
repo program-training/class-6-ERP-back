@@ -12,16 +12,16 @@ const productService = {
     return product ? (product.toJSON() as ShopProductInterface) : null;
   },
 
-  updateProductQuantity: async (id: string, operation: string): Promise<ShopProductInterface | null> => {
+  updateProductQuantity: async (id: string, operation: number ): Promise<ShopProductInterface | null | string> => {
     const product = await Product.findOne({ where: { product_id:id } }); // Assuming 'id' is the correct property
     if (!product) {
-      return null; // Product not found
+      return "no product id"; // Product not found “no product id” | “not enough in stock”
     }
     
-    if (operation === 'increment') {
-      product.quantity += 1;
-    } else if (operation === 'decrement' && product.quantity > 0) {
-      product.quantity -= 1;
+    if (product.quantity > 0) {
+      product.quantity -= operation;
+    } else  {
+      return "not enough in stock"
     }
 
     // Save the updated product
