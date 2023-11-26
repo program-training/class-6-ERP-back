@@ -16,7 +16,6 @@ const productService = {
             include: [products_model_1.Product],
             raw: true,
         });
-        console.log(inventory);
         return inventory;
     }),
     getInventoryById: (productId) => __awaiter(void 0, void 0, void 0, function* () {

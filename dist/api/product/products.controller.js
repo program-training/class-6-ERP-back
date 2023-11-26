@@ -51,7 +51,6 @@ const addNewInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, func
 const updateInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = req.params.productId;
     const updatedInventoryItemData = req.body;
-    console.log(updatedInventoryItemData);
     try {
         const updatedInventoryItem = yield products_service_1.default.updateInventoryItem(productId, updatedInventoryItemData);
         if (updatedInventoryItem) {

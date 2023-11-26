@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize';
 
-// const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
+const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
 
-export const sequelize = new Sequelize("postgres://hfqxkawb:bypOr7eSKuoFtbECdrKcQOLNNNMfzHqj@cornelius.db.elephantsql.com/hfqxkawb" ,{
+export const sequelize = new Sequelize( connectToDatabaseString!,{
 
 
     pool: {

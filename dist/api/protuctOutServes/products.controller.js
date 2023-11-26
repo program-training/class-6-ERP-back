@@ -28,10 +28,8 @@ const getAllProductsOut = (req, res) => __awaiter(void 0, void 0, void 0, functi
 // Get product by ID
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = (req.params.productId);
-    console.log(productId);
     try {
         const product = yield products_service_1.default.getProductById(productId);
-        console.log(product);
         if (product) {
             res.status(200).json(product);
         }

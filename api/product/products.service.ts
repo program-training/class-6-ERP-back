@@ -8,7 +8,6 @@ const productService = {
             include: [Product],
             raw: true,
         });
-        console.log(inventory);
 
         return inventory as unknown as AdminProductInterface[];
     },

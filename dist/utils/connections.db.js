@@ -11,8 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectToDatabase = exports.sequelize = void 0;
 const sequelize_1 = require("sequelize");
-// const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
-exports.sequelize = new sequelize_1.Sequelize("postgres://hfqxkawb:bypOr7eSKuoFtbECdrKcQOLNNNMfzHqj@cornelius.db.elephantsql.com/hfqxkawb", {
+const connectToDatabaseString = process.env.CONNECTION_STRING_DB;
+exports.sequelize = new sequelize_1.Sequelize(connectToDatabaseString, {
     pool: {
         max: 1500,
         min: 0,
