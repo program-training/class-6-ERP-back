@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = 'erp';
 
-export const authenticateToken = (req: Request, res: Response, next: NextFunction) => {
+export function authenticateToken (req: Request, res: Response, next: NextFunction) {
   const token = req.header('Authorization');
 
   if (!token) {
