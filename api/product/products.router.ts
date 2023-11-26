@@ -1,13 +1,18 @@
 import express from "express";
-import { authenticateToken } from "./middleware";
 import productController from "./products.controller";
 import shopController from "../protuctOutServes/products.controller"
 
 const router = express.Router();
 
+// Out service products router
 router.get(`/shop_inventory`, shopController.getAllProductsOut);
 router.get('/shop_inventory/:productId', shopController.getProductById);
 router.post('/shop_inventory/updateInventory/:productId', shopController.updateProductQuantity);
+
+
+
+
+import { authenticateToken } from "./middleware";
 
 router.use(authenticateToken);
 
@@ -21,7 +26,7 @@ router.get('/inventory', productController.getAllInventory);
 router.get('/inventory/:productId', productController.getInventoryById);
 
 // Updates an inventory item
-router.put('/inventory/:productId', productController.updateInventoryItem);
+router.patch('/inventory/:productId', productController.updateInventoryItem);
 
 // Deletes an inventory item
 router.delete('/inventory/:productId', productController.deleteInventoryItem);

@@ -45,7 +45,8 @@ const addNewInventoryItem = async (req: Request, res: Response): Promise<void> =
 const updateInventoryItem = async (req: Request, res: Response): Promise<void> => {
     const productId = req.params.productId;
     const updatedInventoryItemData = req.body;
-
+    console.log(updatedInventoryItemData);
+    
     try {
         const updatedInventoryItem = await productService.updateInventoryItem(productId, updatedInventoryItemData);
         if (updatedInventoryItem) {
