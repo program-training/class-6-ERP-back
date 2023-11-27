@@ -18,7 +18,7 @@ const productService = {
       return "no product id"; // Product not found “no product id” | “not enough in stock”
     }
     
-    if (product.quantity > 0) {
+    if (product.quantity >= operation) {
       product.quantity -= operation;
     } else  {
       return "not enough in stock"

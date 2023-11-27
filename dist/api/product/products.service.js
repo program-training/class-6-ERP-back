@@ -16,7 +16,6 @@ const productService = {
             include: [products_model_1.Product],
             raw: true,
         });
-        console.log(inventory);
         return inventory;
     }),
     getInventoryById: (productId) => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,7 +28,7 @@ const productService = {
     }),
     addNewInventoryItem: (newInventoryItemData) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            // Create a new Product            
+            // Create a new Product
             const createdProduct = yield products_model_1.Product.create(newInventoryItemData.product);
             // Create a new AdminProduct with additional properties
             const createdAdminProduct = yield products_model_1.AdminProduct.create(Object.assign(Object.assign({}, newInventoryItemData.Admin_Products), { product_id: createdProduct.product_id }));
@@ -48,14 +47,31 @@ const productService = {
         }
     }),
     updateInventoryItem: (productId, updatedInventoryItemData) => __awaiter(void 0, void 0, void 0, function* () {
+        // Find the inventory item with the given product ID
         const inventoryItem = yield products_model_1.AdminProduct.findOne({
             where: { product_id: productId },
-            include: [products_model_1.Product],
+            include: [products_model_1.Product], // Include Product table in the query
         });
+        // If the inventory item is not found, return null
         if (!inventoryItem) {
             return null;
         }
+        // Update in AdminProduct Table
         yield inventoryItem.update(updatedInventoryItemData);
+        console.log("Update in AdminProduct successful");
+        // Access the associated Product instance
+        const associatedProduct = yield inventoryItem.getProduct(); // Use type casting here
+        // Log the associatedProduct to check if it exists
+        console.log("Associated Product:", associatedProduct);
+        // Update the associated Product instance in the Product table
+        if (associatedProduct) {
+            yield associatedProduct.update(updatedInventoryItemData); // Type casting here as well
+            console.log("Update in Product successful");
+        }
+        else {
+            console.log("Associated Product not found");
+        }
+        // Return the updated inventory item along with the associated product data
         return inventoryItem.toJSON();
     }),
     deleteInventoryItem: (productId) => __awaiter(void 0, void 0, void 0, function* () {

@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config()
+// import dotenv from 'dotenv';
+// dotenv.config()
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -8,9 +8,7 @@ import usersRouter from './api/users/users.router';
 import { connectToDatabase } from './utils/connections.db';
 
 // const port = process.env.PORT
-
-
-const port = 8200
+ const port = 8200
 
 connectToDatabase()
 

@@ -1,5 +1,5 @@
 import { Product, AdminProduct } from './products.model';
-import { ShopProductInterface, AdminProductInterface, ProductCreateInput } from './products.interface';
+import { ShopProductInterface, AdminProductInterface, ProductCreateInput , UpdateProductRequest} from './products.interface';
 
 
 const productService = {
@@ -8,8 +8,6 @@ const productService = {
             include: [Product],
             raw: true,
         });
-        console.log(inventory);
-
         return inventory as unknown as AdminProductInterface[];
     },
 
@@ -35,9 +33,9 @@ const productService = {
         }
     ): Promise<{ adminProduct: AdminProductInterface; product: ShopProductInterface | null }> => {
         try {
-            // Create a new Product            
+            // Create a new Product
             const createdProduct = await Product.create(newInventoryItemData.product as ProductCreateInput) as unknown as ShopProductInterface;
-
+    
             // Create a new AdminProduct with additional properties
             const createdAdminProduct = await AdminProduct.create({
                 ...newInventoryItemData.Admin_Products,
@@ -64,19 +62,43 @@ const productService = {
         productId: string,
         updatedInventoryItemData: Partial<AdminProductInterface>
     ): Promise<AdminProductInterface | null> => {
+        // Find the inventory item with the given product ID
         const inventoryItem = await AdminProduct.findOne({
             where: { product_id: productId },
-            include: [Product],
+            include: [Product], // Include Product table in the query
         });
+    
+        // If the inventory item is not found, return null
         if (!inventoryItem) {
             return null;
         }
+    
+       // Update in AdminProduct Table
+await inventoryItem.update(updatedInventoryItemData);
+console.log("Update in AdminProduct successful");
 
-        await inventoryItem.update(updatedInventoryItemData);
+// Access the associated Product instance
+const associatedProduct = await (inventoryItem as any).getProduct(); // Use type casting here
 
+// Log the associatedProduct to check if it exists
+console.log("Associated Product:", associatedProduct);
+
+// Update the associated Product instance in the Product table
+if (associatedProduct) {
+    await associatedProduct.update(updatedInventoryItemData as ProductCreateInput); // Type casting here as well
+    console.log("Update in Product successful");
+} else {
+    console.log("Associated Product not found");
+}
+    
+        // Return the updated inventory item along with the associated product data
         return inventoryItem.toJSON() as AdminProductInterface;
     },
+    
+    
+    
 
+    
 
     deleteInventoryItem: async (productId: string): Promise<{ success: boolean, message?: string }> => {
         try {
