@@ -1,9 +1,6 @@
-// product.controller.ts
 import { Request, Response } from 'express';
 import productService from './products.service';
-// import { ShopProductInterface } from './products.interface';
 
-// Get all products
 const getAllProductsOut = async (req: Request, res: Response): Promise<void> => {
     
     try {
@@ -16,7 +13,6 @@ const getAllProductsOut = async (req: Request, res: Response): Promise<void> => 
 };
 
 
-// Get product by ID
 const getProductById = async (req: Request, res: Response): Promise<void> => {
     const productId = (req.params.productId);
     
@@ -33,7 +29,6 @@ const getProductById = async (req: Request, res: Response): Promise<void> => {
     }
 };
 
-// Update quantity
 const updateProductQuantity = async (req: Request, res: Response): Promise<void> => {
     const productId = (req.params.productId);
     const operation = req.body.operation; // 'increment' or 'decrement'
