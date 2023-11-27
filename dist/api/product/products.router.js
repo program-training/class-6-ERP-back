@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const middleware_1 = require("./middleware");
 const products_controller_1 = __importDefault(require("./products.controller"));
-const products_controller_2 = __importDefault(require("../protuctOutServes/products.controller"));
+const products_controller_2 = __importDefault(require("../externall_protuct/products.controller"));
 const router = express_1.default.Router();
 router.get(`/shop_inventory`, products_controller_2.default.getAllProductsOut);
 router.get('/shop_inventory/:productId', products_controller_2.default.getProductById);

@@ -1,7 +1,7 @@
 import express from "express";
 import { authenticateToken } from "./middleware";
 import productController from "./products.controller";
-import shopController from "../protuctOutServes/products.controller"
+import shopController from "../externall_protuct/products.controller"
 
 const router = express.Router();
 
