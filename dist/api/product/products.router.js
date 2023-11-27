@@ -23,4 +23,6 @@ router.get('/inventory/:productId', products_controller_1.default.getInventoryBy
 router.patch('/inventory/:productId', products_controller_1.default.updateInventoryItem);
 // Deletes an inventory item
 router.delete('/inventory/:productId', products_controller_1.default.deleteInventoryItem);
+
+// router.use(authenticateToken);
 exports.default = router;

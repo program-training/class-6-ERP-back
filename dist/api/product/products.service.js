@@ -60,12 +60,14 @@ const productService = {
         yield inventoryItem.update(updatedInventoryItemData);
         console.log("Update in AdminProduct successful");
         // Access the associated Product instance
-        const associatedProduct = yield inventoryItem.getProduct();
+        const associatedProduct = yield inventoryItem.getProduct(); // Use type casting here
+
         // Log the associatedProduct to check if it exists
         console.log("Associated Product:", associatedProduct);
         // Update the associated Product instance in the Product table
         if (associatedProduct) {
-            yield associatedProduct.update(updatedInventoryItemData.product);
+            yield associatedProduct.update(updatedInventoryItemData); // Type casting here as well
+
             console.log("Update in Product successful");
         }
         else {

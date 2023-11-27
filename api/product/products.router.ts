@@ -29,5 +29,7 @@ router.patch('/inventory/:productId', productController.updateInventoryItem);
 // Deletes an inventory item
 router.delete('/inventory/:productId', productController.deleteInventoryItem);
 
+// router.use(authenticateToken);
+
 
 export default router;
