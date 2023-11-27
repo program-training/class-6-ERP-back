@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const middleware_1 = require("./middleware");
 const products_controller_1 = __importDefault(require("./products.controller"));
 const products_controller_2 = __importDefault(require("../protuctOutServes/products.controller"));
 const router = express_1.default.Router();
@@ -18,8 +17,8 @@ router.get('/inventory/:productId', products_controller_1.default.getInventoryBy
 // Adds a new inventory item
 router.post('/inventory', products_controller_1.default.addNewInventoryItem);
 // Updates an inventory item
-router.put('/inventory/:productId', products_controller_1.default.updateInventoryItem);
+router.patch('/inventory/:productId', products_controller_1.default.updateInventoryItem);
 // Deletes an inventory item
 router.delete('/inventory/:productId', products_controller_1.default.deleteInventoryItem);
-router.use(middleware_1.authenticateToken);
+// router.use(authenticateToken);
 exports.default = router;

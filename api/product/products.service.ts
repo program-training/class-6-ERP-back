@@ -1,5 +1,5 @@
 import { Product, AdminProduct } from './products.model';
-import { ShopProductInterface ,AdminProductInterface,ProductCreateInput} from './products.interface';
+import { ShopProductInterface ,AdminProductInterface,ProductCreateInput, UpdateProductRequest} from './products.interface';
 
 
 const productService = {
@@ -56,24 +56,48 @@ const productService = {
             throw new Error('Error creating new inventory item');
         }
     },
-    
-    
+
+
     updateInventoryItem: async (
         productId: string,
         updatedInventoryItemData: Partial<AdminProductInterface>
     ): Promise<AdminProductInterface | null> => {
+        // Find the inventory item with the given product ID
         const inventoryItem = await AdminProduct.findOne({
             where: { product_id: productId },
-            include: [Product], 
-        });    
+            include: [Product], // Include Product table in the query
+        });
+    
+        // If the inventory item is not found, return null
         if (!inventoryItem) {
             return null;
         }
     
-        await inventoryItem.update(updatedInventoryItemData);
+       // Update in AdminProduct Table
+await inventoryItem.update(updatedInventoryItemData);
+console.log("Update in AdminProduct successful");
+
+// Access the associated Product instance
+const associatedProduct = await (inventoryItem as any).getProduct(); // Use type casting here
+
+// Log the associatedProduct to check if it exists
+console.log("Associated Product:", associatedProduct);
+
+// Update the associated Product instance in the Product table
+if (associatedProduct) {
+    await associatedProduct.update(updatedInventoryItemData as ProductCreateInput); // Type casting here as well
+    console.log("Update in Product successful");
+} else {
+    console.log("Associated Product not found");
+}
     
+        // Return the updated inventory item along with the associated product data
         return inventoryItem.toJSON() as AdminProductInterface;
     },
+    
+    
+    
+
     
 
     deleteInventoryItem: async (productId: string): Promise<{ success: boolean, message?: string }> => {

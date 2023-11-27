@@ -19,12 +19,12 @@ router.get('/inventory/:productId', productController.getInventoryById);
 // Adds a new inventory item
 router.post('/inventory', productController.addNewInventoryItem);
 // Updates an inventory item
-router.put('/inventory/:productId', productController.updateInventoryItem);
+router.patch('/inventory/:productId', productController.updateInventoryItem);
 
 // Deletes an inventory item
 router.delete('/inventory/:productId', productController.deleteInventoryItem);
 
-router.use(authenticateToken);
+// router.use(authenticateToken);
 
 
 
