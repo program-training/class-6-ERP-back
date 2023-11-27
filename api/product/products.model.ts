@@ -1,7 +1,6 @@
 import { sequelize } from "../../utils/connections.db";
 import { DataTypes } from 'sequelize';
 
-// Product Model
 export const Product = sequelize.define('products', {
     product_id: {
         type: DataTypes.INTEGER,
@@ -41,7 +40,6 @@ export const Product = sequelize.define('products', {
     timestamps: false,
 });
 
-// AdminProduct Model (Extends Product Model for Admin Specific Fields)
 export const AdminProduct = sequelize.define('admin_products', 
 {
     product_id: {
@@ -67,10 +65,8 @@ export const AdminProduct = sequelize.define('admin_products',
 
 );
 
-// Define foreign key relationship between AdminProduct and Product
 AdminProduct.belongsTo(Product, { foreignKey: 'product_id' });
 
-// Synchronize the models with the database
 sequelize.sync()
     .then(() => {
         console.log('Products and AdminProducts tables created successfully.');

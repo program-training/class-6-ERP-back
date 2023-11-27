@@ -1,4 +1,3 @@
-// product.interface.ts
 export interface ShopProductInterface {
     product_id?: string;
     name: string;
@@ -14,7 +13,7 @@ export interface ShopProductInterface {
 
 export interface AdminProductInterface extends ShopProductInterface {
 
-    is_for_sale: boolean; // Adjust to match the actual property name in the returned object
+    is_for_sale: boolean; 
     cost_price: number;
     supplier: string;
 }
@@ -25,13 +24,3 @@ export type UpdateProductRequest = Partial<AdminProductInterface>;
 export type ProductCreateInput = Omit<ShopProductInterface, 'product_id'>;
 
 
-
-
-
-// export type CreateProductRequest = Omit<ShopProductInterface, 'product_id'>;
-
-
-
-
-
-// export type CreateProductRequest = Omit<ShopProductInterface, 'product_id'>;

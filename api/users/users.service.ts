@@ -2,7 +2,6 @@ import { AdminUser } from "./users.model";
 import { User } from "./users.interface";
 import * as handelUsers from './users.handler'
 import * as usersValidation from './users.validation';
-import { Model } from "mongoose";
 
 export const loginUser = async (reqBody: User) => {
 
@@ -33,7 +32,7 @@ export const registerUser = async (reqBody: User) => {
     try {
       if (!usersValidation.newUserValidator(password!)) {
         return { message: 'The password must contain 7 characters with at least one uppercase letter and one lowercase letter.', status: 400 };
-      } else if (await usersValidation.ifInDB(reqBody)) {
+      } else if (await usersValidation.ifUserExisting(reqBody)) {
         return { message: 'User already exists', status: 409 };
       }
   

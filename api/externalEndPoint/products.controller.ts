@@ -32,13 +32,10 @@ const getProductById = async (req: Request, res: Response): Promise<void> => {
 const updateProductQuantity = async (req: Request, res: Response) => {
     const productId = req.params.productId;
     const amount = req.body.amount; 
-    console.log("productId:", productId);
-    console.log("amount:", amount);
 
     try {
         const product = await productService.updateProductQuantity(productId, amount);
         if (product) {
-            console.log("product updated successfully");
             res.status(200).json(product);
         } else {
             res.status(404).json({ message: 'Product not found' });

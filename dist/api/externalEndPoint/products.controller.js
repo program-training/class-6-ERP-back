@@ -41,12 +41,9 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
 const updateProductQuantity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = req.params.productId;
     const amount = req.body.amount;
-    console.log("productId:", productId);
-    console.log("amount:", amount);
     try {
         const product = yield products_service_1.default.updateProductQuantity(productId, amount);
         if (product) {
-            console.log("product updated successfully");
             res.status(200).json(product);
         }
         else {

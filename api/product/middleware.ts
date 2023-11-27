@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const SECRET_KEY = 'erp';
+const secretKey = process.env.SECRET_KEY
 
 export function authenticateToken (req: Request, res: Response, next: NextFunction) {
   const token = req.header('Authorization');
@@ -10,7 +10,7 @@ export function authenticateToken (req: Request, res: Response, next: NextFuncti
     return res.status(401).json({ message: 'Unauthorized: Missing token' });
   }
 
-  jwt.verify(token, SECRET_KEY, (err, user) => {
+  jwt.verify(token, secretKey!, (err) => {
     if (err) {
       return res.status(403).json({ message: 'Forbidden: Invalid token' });
     }
