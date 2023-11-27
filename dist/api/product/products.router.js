@@ -5,12 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const products_controller_1 = __importDefault(require("./products.controller"));
-const products_controller_2 = __importDefault(require("../protuctOutServes/products.controller"));
+const products_controller_2 = __importDefault(require("../externalEndPoint/products.controller"));
 const router = express_1.default.Router();
 // Out service products router
 router.get(`/shop_inventory`, products_controller_2.default.getAllProductsOut);
 router.get('/shop_inventory/:productId', products_controller_2.default.getProductById);
-router.post('/shop_inventory/updateInventory/:productId', products_controller_2.default.updateProductQuantity);
+router.post('/shop_inventory/:productId', products_controller_2.default.updateProductQuantity);
 const middleware_1 = require("./middleware");
 router.use(middleware_1.authenticateToken);
 //Add product 
@@ -23,6 +23,5 @@ router.get('/inventory/:productId', products_controller_1.default.getInventoryBy
 router.patch('/inventory/:productId', products_controller_1.default.updateInventoryItem);
 // Deletes an inventory item
 router.delete('/inventory/:productId', products_controller_1.default.deleteInventoryItem);
-
 // router.use(authenticateToken);
 exports.default = router;
