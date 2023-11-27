@@ -32,7 +32,7 @@ exports.Product = connections_db_1.sequelize.define('products', {
         type: sequelize_1.DataTypes.DECIMAL,
     },
     image_url: {
-        type: sequelize_1.DataTypes.STRING(255),
+        type: sequelize_1.DataTypes.TEXT,
     },
     image_alt: {
         type: sequelize_1.DataTypes.STRING(255),

@@ -19,11 +19,9 @@ const getAllProductsOut = async (req: Request, res: Response): Promise<void> => 
 // Get product by ID
 const getProductById = async (req: Request, res: Response): Promise<void> => {
     const productId = (req.params.productId);
-    console.log(productId);
     
     try {
         const product = await productService.getProductById(productId);
-        console.log(product);
         
         if (product) {
             res.status(200).json(product);
