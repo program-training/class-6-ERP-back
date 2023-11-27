@@ -7,7 +7,7 @@ const router = express.Router();
 // Out service products router
 router.get(`/shop_inventory`, shopController.getAllProductsOut);
 router.get('/shop_inventory/:productId', shopController.getProductById);
-router.post('/shop_inventory/updateInventory/:productId', shopController.updateProductQuantity);
+router.post('/shop_inventory/:productId', shopController.updateProductQuantity);
 
 
 import { authenticateToken } from "./middleware";

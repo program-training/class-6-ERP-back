@@ -47,7 +47,7 @@ const updateInventoryItem = async (req: Request, res: Response): Promise<void> =
     const updatedInventoryItemData = req.body;
     
     try {
-        const updatedInventoryItem = await productService.updateInventoryItem(productId, updatedInventoryItemData);
+        const updatedInventoryItem = await productService.updateInventoryItem(productId, updatedInventoryItemData.amount);
         if (updatedInventoryItem) {
             res.status(200).json(updatedInventoryItem);
         } else {

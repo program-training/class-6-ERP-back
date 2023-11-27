@@ -28,7 +28,7 @@ const productService = {
     }),
     addNewInventoryItem: (newInventoryItemData) => __awaiter(void 0, void 0, void 0, function* () {
         try {
-            // Create a new Product            
+            // Create a new Product
             const createdProduct = yield products_model_1.Product.create(newInventoryItemData.product);
             // Create a new AdminProduct with additional properties
             const createdAdminProduct = yield products_model_1.AdminProduct.create(Object.assign(Object.assign({}, newInventoryItemData.Admin_Products), { product_id: createdProduct.product_id }));
@@ -61,13 +61,11 @@ const productService = {
         console.log("Update in AdminProduct successful");
         // Access the associated Product instance
         const associatedProduct = yield inventoryItem.getProduct(); // Use type casting here
-
         // Log the associatedProduct to check if it exists
         console.log("Associated Product:", associatedProduct);
         // Update the associated Product instance in the Product table
         if (associatedProduct) {
             yield associatedProduct.update(updatedInventoryItemData); // Type casting here as well
-
             console.log("Update in Product successful");
         }
         else {

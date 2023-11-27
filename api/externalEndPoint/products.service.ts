@@ -1,6 +1,6 @@
 import { Product } from './products.model';
 import { ShopProductInterface } from './products.interface';
-
+import { Sequelize } from 'sequelize';
 const productService = {
   getAllProducts: async (): Promise<ShopProductInterface[]> => {
     const products = await Product.findAll();
@@ -8,26 +8,21 @@ const productService = {
   },
 
   getProductById: async (id: string): Promise<ShopProductInterface | null> => {
-    const product = await Product.findOne({ where: { product_id: id } }); // Assuming 'id' is the correct property
+    const product = await Product.findOne({ where: { product_id: id } }); 
     return product ? (product.toJSON() as ShopProductInterface) : null;
   },
 
-  updateProductQuantity: async (id: string, operation: 'increment' | 'decrement'): Promise<ShopProductInterface | null> => {
-    const produc  = await Product.findOne({ where: { product_id: id } })  // Assuming 'id' is the correct property
-    if (!product) {
-      return null; // Product not found
-    }
-
-    if (operation === 'increment') {
-      product.quantity += 1;
-    } else if (operation === 'decrement' && product.quantity > 0) {
-      product.quantity -= 1;
-    }
-
-    // Save the updated product
-    await product.save();
-    return product.toJSON() as ShopProductInterface;
-  },
+  updateProductQuantity: async (id: string, amount: number): Promise<ShopProductInterface | string | number> => {
+    const result = await Product.update(
+      { quantity: Sequelize.literal(`quantity - ${amount}`) },
+      { where: { product_id: id } }
+    );
+    
+    if (result[0] === 0) {
+      return "Product not found!";
+    }     
+    return result[0];
+},
 };
 
 export default productService;
