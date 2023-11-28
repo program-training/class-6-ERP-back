@@ -64,7 +64,7 @@ const registerUser = (reqBody) => __awaiter(void 0, void 0, void 0, function* ()
         if (!usersValidation.newUserValidator(password)) {
             return { message: 'The password must contain 7 characters with at least one uppercase letter and one lowercase letter.', status: 400 };
         }
-        else if (yield usersValidation.ifInDB(reqBody)) {
+        else if (yield usersValidation.ifUserExisting(reqBody)) {
             return { message: 'User already exists', status: 409 };
         }
         const passwordHashed = yield handelUsers.hashPassword(password);

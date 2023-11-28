@@ -38,15 +38,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerUser = exports.loginUser = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userService = __importStar(require("./users.service"));
-const SECRET_KEY = 'erp';
+const secretKey = process.env.SECRET_KEY;
 const generateToken = (userId) => {
-    return jsonwebtoken_1.default.sign({ userId }, SECRET_KEY, { expiresIn: '3h' });
+    return jsonwebtoken_1.default.sign({ userId }, secretKey, { expiresIn: '3h' });
 };
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield userService.loginUser(req.body);
         if (user) {
-            const token = generateToken(SECRET_KEY);
+            const token = generateToken(secretKey);
             res.status(user.status).json({ token });
         }
         else {
@@ -62,7 +62,6 @@ exports.loginUser = loginUser;
 const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userCreationResult = yield userService.registerUser(req.body);
-        // Check the status and send appropriate response
         if (userCreationResult.status === 201) {
             res.status(userCreationResult.status).json({ user: userCreationResult.user, message: 'User created successfully' });
         }

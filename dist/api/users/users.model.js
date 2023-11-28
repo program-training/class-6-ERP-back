@@ -19,5 +19,5 @@ exports.AdminUser = connections_db_1.sequelize.define('admin_users', {
         allowNull: false,
     },
 }, {
-    timestamps: false, // Set timestamps to false to exclude createdAt and updatedAt
+    timestamps: false,
 });
