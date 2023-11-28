@@ -4,3 +4,4 @@ type;
 CreateProductRequest = (Omit);
 // export type CreateProductRequest = Omit<ShopProductInterface, 'product_id'>;
 // export type CreateProductRequest = Omit<ShopProductInterface, 'product_id'>;
+// export type CreateProductRequest = Omit<ShopProductInterface, 'product_id'>;

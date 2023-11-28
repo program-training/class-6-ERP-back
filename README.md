@@ -1,1 +1,4 @@
-# class-6-ERP-back
+# env
+CONNECTION_STRING_DB
+PORT
+SECRET_KEY=erp
