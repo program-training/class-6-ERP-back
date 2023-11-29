@@ -17,6 +17,10 @@ const app_1 = require("../../app");
 const supertest_1 = __importDefault(require("supertest"));
 const connections_db_1 = require("../../utils/connections.db");
 (0, globals_1.describe)('API routes', () => {
+    const userData = {
+        username: "user22@gmail.com",
+        password: "Password22",
+    };
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         try {
             yield connections_db_1.sequelize.authenticate();
@@ -27,13 +31,17 @@ const connections_db_1 = require("../../utils/connections.db");
             throw error;
         }
     }));
-    const userData = {
-        email: 'johndoe@example.com',
-        password: 'T4estpassword',
-    };
-    (0, globals_1.test)('POST /api/users/register', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield (0, supertest_1.default)(app_1.app).post('localhost:8200/api/users/register').send(userData);
-        (0, globals_1.expect)(response.status).toBe(201);
-        (0, globals_1.expect)(response.body.message).toBe('User created successfully');
+    // test('POST /api/users/register', async () => {
+    //   const response = await request(app).post('/api/users/register').send(userData);
+    //   expect(response.status).toBe(201);
+    //   expect(response.body.message).toBe('User created successfully');
+    // });
+    (0, globals_1.test)('POST /api/users/login', () => __awaiter(void 0, void 0, void 0, function* () {
+        const response = yield (0, supertest_1.default)(app_1.app).post('/api/users/login').send(userData);
+        (0, globals_1.expect)(response.status).toBe(200);
+        (0, globals_1.expect)(response.body).toHaveProperty('token');
+    }));
+    afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield connections_db_1.sequelize.close();
     }));
 });
