@@ -4,27 +4,31 @@ import * as handelUsers from './users.handler'
 import * as usersValidation from './users.validation';
 
 export const loginUser = async (reqBody: User) => {
+  const { username, password } = reqBody;
 
-    const { username, password } = reqBody
+  try {
+    const userInstance = await AdminUser.findOne({
+      where: { username: username }
+    });
 
-    try {
-        const user = await AdminUser.findOne({
-            where: { username: username }
-        });                
-        if (!user) {
-            return { content: { message: 'User not found' }, status: 404 };
-        }
-        if (await handelUsers.comparePasswrd(password, user.dataValues.password)) {
-            return { content: user, status: 200 };
-        } else {
-            return { content: { message: 'Incorrect password' }, status: 401 };
-        }
-    } catch (err) {
-        console.error(err);
-        return { content: { message: 'Internal Server Error' }, status: 500 };
+    const user: User = userInstance!.dataValues;
+    console.log(user.password);
+
+
+    if (!user.password) {
+      return { content: { message: 'User not found' }, status: 404 };
     }
-};
 
+    if ( await handelUsers.comparePasswrd(password, user.password)) {
+      return { content: user, status: 200 };
+    } else {
+      return { content: { message: 'Incorrect password' }, status: 401 };
+    }
+  } catch (err) {
+    console.error(err);
+    return { content: { message: 'Internal Server Error' }, status: 500 };
+  }
+};
 export const registerUser = async (reqBody: User) => {
 
     const { username, password } = reqBody

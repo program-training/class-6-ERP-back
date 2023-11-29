@@ -39,13 +39,15 @@ const usersValidation = __importStar(require("./users.validation"));
 const loginUser = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = reqBody;
     try {
-        const user = yield users_model_1.AdminUser.findOne({
+        const userInstance = yield users_model_1.AdminUser.findOne({
             where: { username: username }
         });
-        if (!user) {
+        const user = userInstance.dataValues;
+        console.log(user.password);
+        if (!user.password) {
             return { content: { message: 'User not found' }, status: 404 };
         }
-        if (yield handelUsers.comparePasswrd(password, user.dataValues.password)) {
+        if (yield handelUsers.comparePasswrd(password, user.password)) {
             return { content: user, status: 200 };
         }
         else {

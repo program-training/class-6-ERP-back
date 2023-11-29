@@ -45,12 +45,12 @@ const generateToken = (userId) => {
 const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield userService.loginUser(req.body);
-        if (user) {
+        if (user.status === 200) {
             const token = generateToken(secretKey);
             res.status(user.status).json({ token });
         }
         else {
-            res.json(' is not logged in');
+            res.status(user.status).json(user.content);
         }
     }
     catch (err) {

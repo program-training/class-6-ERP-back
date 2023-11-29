@@ -11,11 +11,11 @@ const generateToken = (userId: string) => {
 export const loginUser = async (req: Request, res: Response) => {  
   try {
     const user = await userService.loginUser(req.body);
-    if (user){
+    if (user.status === 200){
       const token = generateToken(secretKey!);
       res.status(user.status).json({ token });
     } else {
-      res.json(' is not logged in');
+      res.status(user.status).json(user.content);
     }
   } catch (err) {
     console.error(err);
