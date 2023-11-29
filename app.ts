@@ -23,7 +23,7 @@ app.use('/erp/api/users', usersRouter);
 
 app.use('/erp/api/products', productRouter);
 
-app.get('/', (req, res) => {
+app.get('/erp', (req, res) => {
     res.send('Hi we get started !');
 });
 
