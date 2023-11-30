@@ -9,9 +9,9 @@ import { connectToDatabase } from './utils/connections.db';
 
 const port = process.env.PORT
 
-connectToDatabase()
-
 export const app = express();
+
+connectToDatabase()
 
 app.use(cors({origin: '*'}));
 
