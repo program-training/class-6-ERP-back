@@ -19,11 +19,11 @@ app.use(morgan('dev'));
 
 app.use(express.json({limit : '50mb'}));
 
-app.use('/erp/api/users', usersRouter);
+app.use('/users', usersRouter);
 
-app.use('/erp/api/products', productRouter);
+app.use('/products', productRouter);
 
-app.get('/erp', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Hi we get started !');
 });
 
