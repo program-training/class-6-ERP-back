@@ -23,6 +23,3 @@ export async function connectToDatabase() {
         console.error('Unable to connect to the database:', error);
     }
 }
-
-
-

@@ -13,14 +13,14 @@ const products_router_1 = __importDefault(require("./api/product/products.router
 const users_router_1 = __importDefault(require("./api/users/users.router"));
 const connections_db_1 = require("./utils/connections.db");
 const port = process.env.PORT;
-(0, connections_db_1.connectToDatabase)();
 exports.app = (0, express_1.default)();
+(0, connections_db_1.connectToDatabase)();
 exports.app.use((0, cors_1.default)({ origin: '*' }));
 exports.app.use((0, morgan_1.default)('dev'));
 exports.app.use(express_1.default.json({ limit: '50mb' }));
-exports.app.use('/api/products', products_router_1.default);
-exports.app.use('/api/users', users_router_1.default);
-exports.app.get('/', (req, res) => {
+exports.app.use('/erp/api/users', users_router_1.default);
+exports.app.use('/erp/api/products', products_router_1.default);
+exports.app.get('/erp', (req, res) => {
     res.send('Hi we get started !');
 });
 exports.app.listen(port, () => {

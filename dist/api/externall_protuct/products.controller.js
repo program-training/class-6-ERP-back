@@ -13,8 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_service_1 = __importDefault(require("./products.service"));
-// import { ShopProductInterface } from './products.interface';
-// Get all products
 const getAllProductsOut = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const products = yield products_service_1.default.getAllProducts();
@@ -25,7 +23,6 @@ const getAllProductsOut = (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({ message: 'Internal server error 1' });
     }
 });
-// Get product by ID
 const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const productId = (req.params.productId);
     try {
@@ -41,13 +38,15 @@ const getProductById = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(500).json({ message: 'Internal server error 2' });
     }
 });
-// Update quantity
 const updateProductQuantity = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productId = (req.params.productId);
-    const operation = req.body.operation; // 'increment' or 'decrement'
+    const productId = req.params.productId;
+    const amount = req.body.amount;
+    console.log("productId:", productId);
+    console.log("amount:", amount);
     try {
-        const product = yield products_service_1.default.updateProductQuantity(productId, operation);
+        const product = yield products_service_1.default.updateProductQuantity(productId, amount);
         if (product) {
+            console.log("product updated successfully");
             res.status(200).json(product);
         }
         else {

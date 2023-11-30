@@ -20,7 +20,7 @@ const productService = {
     
     if (result[0] === 0) {
       return "Product not found!";
-    }     
+    }    
     return result[0];
 },
 };

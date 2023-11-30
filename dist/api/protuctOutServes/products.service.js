@@ -22,13 +22,13 @@ const productService = {
     updateProductQuantity: (id, operation) => __awaiter(void 0, void 0, void 0, function* () {
         const product = yield products_model_1.Product.findOne({ where: { product_id: id } }); // Assuming 'id' is the correct property
         if (!product) {
-            return "no product id"; // Product not found “no product id” | “not enough in stock”
+            return null; // Product not found
         }
-        if (product.quantity > 0) {
-            product.quantity -= operation;
+        if (operation === 'increment') {
+            product.quantity += 1;
         }
-        else {
-            return "not enough in stock";
+        else if (operation === 'decrement' && product.quantity > 0) {
+            product.quantity -= 1;
         }
         // Save the updated product
         yield product.save();
