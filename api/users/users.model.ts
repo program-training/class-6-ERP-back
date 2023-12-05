@@ -17,5 +17,5 @@ export const AdminUser = sequelize.define('admin_users', {
       allowNull: false,
   },
 }, {
-  timestamps: false, // Set timestamps to false to exclude createdAt and updatedAt
+  timestamps: false, 
 });

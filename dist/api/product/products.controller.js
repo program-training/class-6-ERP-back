@@ -52,7 +52,7 @@ const updateInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, func
     const productId = req.params.productId;
     const updatedInventoryItemData = req.body;
     try {
-        const updatedInventoryItem = yield products_service_1.default.updateInventoryItem(productId, updatedInventoryItemData);
+        const updatedInventoryItem = yield products_service_1.default.updateInventoryItem(productId, updatedInventoryItemData.amount);
         if (updatedInventoryItem) {
             res.status(200).json(updatedInventoryItem);
         }

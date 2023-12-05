@@ -39,13 +39,15 @@ const usersValidation = __importStar(require("./users.validation"));
 const loginUser = (reqBody) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = reqBody;
     try {
-        const user = yield users_model_1.AdminUser.findOne({
+        const userInstance = yield users_model_1.AdminUser.findOne({
             where: { username: username }
         });
-        if (!user) {
+        const user = userInstance.dataValues;
+        console.log(user.password);
+        if (!user.password) {
             return { content: { message: 'User not found' }, status: 404 };
         }
-        if (yield handelUsers.comparePasswrd(password, user.dataValues.password)) {
+        if (yield handelUsers.comparePasswrd(password, user.password)) {
             return { content: user, status: 200 };
         }
         else {
@@ -64,7 +66,7 @@ const registerUser = (reqBody) => __awaiter(void 0, void 0, void 0, function* ()
         if (!usersValidation.newUserValidator(password)) {
             return { message: 'The password must contain 7 characters with at least one uppercase letter and one lowercase letter.', status: 400 };
         }
-        else if (yield usersValidation.ifInDB(reqBody)) {
+        else if (yield usersValidation.ifUserExisting(reqBody)) {
             return { message: 'User already exists', status: 409 };
         }
         const passwordHashed = yield handelUsers.hashPassword(password);

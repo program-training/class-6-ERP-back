@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize';
 
-// const connectToDatabaseString: string | undefined = process.env.CONNECTION_STRING_DB
+const connectToDatabaseString : string | undefined= process.env.CONNECTION_STRING_DB 
 
-export const sequelize = new Sequelize("postgres://hfqxkawb:bypOr7eSKuoFtbECdrKcQOLNNNMfzHqj@cornelius.db.elephantsql.com/hfqxkawb" ,{
+export const sequelize = new Sequelize( connectToDatabaseString! ,{
 
 
     pool: {
@@ -12,8 +12,7 @@ export const sequelize = new Sequelize("postgres://hfqxkawb:bypOr7eSKuoFtbECdrKc
         idle: 10000
       }
     }
-
-) // Example for postgres
+) 
 
 
 export async function connectToDatabase() {
@@ -24,6 +23,3 @@ export async function connectToDatabase() {
         console.error('Unable to connect to the database:', error);
     }
 }
-
-
-

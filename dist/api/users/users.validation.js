@@ -9,15 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ifInDB = exports.newUserValidator = void 0;
+exports.ifUserExisting = exports.newUserValidator = void 0;
 const users_model_1 = require("./users.model");
 const newUserValidator = (password) => {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$!%*?&]{7,12}$/;
     return password.length >= 7 && passwordRegex.test(password);
 };
 exports.newUserValidator = newUserValidator;
-const ifInDB = (reqUser) => __awaiter(void 0, void 0, void 0, function* () {
+const ifUserExisting = (reqUser) => __awaiter(void 0, void 0, void 0, function* () {
     const userFromDB = yield users_model_1.AdminUser.findOne({ where: { username: reqUser.username } });
     return userFromDB !== null;
 });
-exports.ifInDB = ifInDB;
+exports.ifUserExisting = ifUserExisting;

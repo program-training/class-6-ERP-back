@@ -2,20 +2,20 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import * as userService from './users.service';
 
-const SECRET_KEY = 'erp'
+const SECRET_KEY = 'erp';
 
 const generateToken = (userId: string) => {
-  return jwt.sign({ userId }, SECRET_KEY, { expiresIn: '3h' });
+  return jwt.sign({ userId }, secretKey!, { expiresIn: '3h' });
 };
 
 export const loginUser = async (req: Request, res: Response) => {  
   try {
     const user = await userService.loginUser(req.body);
-    if (user){
-      const token = generateToken(SECRET_KEY);
+    if (user.status === 200){
+      const token = generateToken(secretKey!);
       res.status(user.status).json({ token });
     } else {
-      res.json(' is not logged in');
+      res.status(user.status).json(user.content);
     }
   } catch (err) {
     console.error(err);
@@ -28,7 +28,6 @@ export const registerUser = async (req: Request, res: Response) => {
   try {
       const userCreationResult = await userService.registerUser(req.body);
 
-      // Check the status and send appropriate response
       if (userCreationResult.status === 201) {
           res.status(userCreationResult.status).json({ user: userCreationResult.user, message: 'User created successfully' });
       } else {
