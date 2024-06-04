@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import * as userService from './users.service';
 
-const SECRET_KEY = 'erp';
+// SECRET_KEY=erp
+
+const secretKey = 'erp';
 
 const generateToken = (userId: string) => {
   return jwt.sign({ userId }, secretKey!, { expiresIn: '3h' });

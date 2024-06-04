@@ -8,7 +8,7 @@ const sequelize_1 = require("sequelize");
 exports.Product = connections_db_1.sequelize.define('products', {
     product_id: {
         type: sequelize_1.DataTypes.INTEGER,
-        autoIncrement: true,
+        autoIncrement: true, // Added autoIncrement for primary key
         primaryKey: true,
     },
     name: {

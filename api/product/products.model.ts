@@ -34,14 +34,11 @@ export const Product = sequelize.define('products', {
     image_alt: {
         type: DataTypes.STRING(255),
     },
-    
-    
-},{
+}, {
     timestamps: false,
 });
 
-export const AdminProduct = sequelize.define('admin_products', 
-{
+export const AdminProduct = sequelize.define('admin_products', {
     product_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -50,6 +47,7 @@ export const AdminProduct = sequelize.define('admin_products',
     is_for_sale: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: true, // Set a default value if applicable
     },
     cost_price: {
         type: DataTypes.DECIMAL,
@@ -57,13 +55,9 @@ export const AdminProduct = sequelize.define('admin_products',
     supplier: {
         type: DataTypes.STRING(255),
     },
-},
-
-{
+}, {
     timestamps: false,
-}
-
-);
+});
 
 AdminProduct.belongsTo(Product, { foreignKey: 'product_id' });
 

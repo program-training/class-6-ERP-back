@@ -31,6 +31,7 @@ const getInventoryById = async (req: Request, res: Response): Promise<void> => {
 
 const addNewInventoryItem = async (req: Request, res: Response): Promise<void> => {
     const newInventoryItemData = req.body;
+console.log(newInventoryItemData);
 
     try {
         const createdInventoryItem = await productService.addNewInventoryItem(newInventoryItemData);

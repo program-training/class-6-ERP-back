@@ -40,6 +40,7 @@ const getInventoryById = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 const addNewInventoryItem = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newInventoryItemData = req.body;
+    console.log(newInventoryItemData);
     try {
         const createdInventoryItem = yield products_service_1.default.addNewInventoryItem(newInventoryItemData);
         res.status(201).json(createdInventoryItem);

@@ -38,7 +38,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.registerUser = exports.loginUser = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const userService = __importStar(require("./users.service"));
-const secretKey = process.env.SECRET_KEY;
+// SECRET_KEY=erp
+const secretKey = 'erp';
 const generateToken = (userId) => {
     return jsonwebtoken_1.default.sign({ userId }, secretKey, { expiresIn: '3h' });
 };

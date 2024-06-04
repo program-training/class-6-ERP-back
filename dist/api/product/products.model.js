@@ -48,6 +48,7 @@ exports.AdminProduct = connections_db_1.sequelize.define('admin_products', {
     is_for_sale: {
         type: sequelize_1.DataTypes.BOOLEAN,
         allowNull: false,
+        defaultValue: true, // Set a default value if applicable
     },
     cost_price: {
         type: sequelize_1.DataTypes.DECIMAL,

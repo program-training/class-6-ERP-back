@@ -25,7 +25,6 @@ dist-ssr
 
 # dotenv environment variables files
 
-.env
 .env.development.local
 .env.test.local
 .env.production.local
